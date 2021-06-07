@@ -19,7 +19,7 @@ describe('StaticAnalysisService', () => {
     inject([HttpTestingController, StaticAnalysisService],
       (httpMock: HttpTestingController, service: StaticAnalysisService) => {
         // We call the service
-        service.getStaticAnalysisCollectorItems('123').subscribe(data => {
+        service.fetchStaticAnalysis('123', 10).subscribe(data => {
           expect(data).toBeTruthy();
         });
         // We set the expectations for the HttpClient mock

@@ -1,0 +1,145 @@
+//@import '../../../../styles/css/dashvariables.scss';
+//@import '../../../../styles/css/mixins.scss';
+//
+//.widget-container-small {
+//  font-size: 10px;
+//  line-height: normal;
+//}
+//
+//// class to add pointer icon
+//.clickable {
+//  cursor: pointer;
+//}
+//
+//// WIDGET
+//// ========================================
+//.widget {
+//  padding: 2.5em 3em;
+//  @include border-radius($dash-widget-border-radius);
+//
+//  .widget {
+//    margin-bottom: 2em;
+//  }
+//
+//  // heading in a widget
+//  .widget-heading {
+//    border-bottom: 1px solid $dash-widget-heading-border;
+//    color: $dash-widget-heading-text;
+//    letter-spacing: .1em;
+//    padding-bottom: .5em;
+//    margin-bottom: 1em;
+//
+//    @include text-lg;
+//    @include border-top-radius($dash-widget-border-radius);
+//
+//    // the cog icon to open the config modal
+//    .widget-settings-icon {
+//      @include transition(color 300ms ease);
+//
+//      &:hover {
+//        color: $dash-dashboard-text-hover;
+//      }
+//    }
+//
+//    .last-updated {
+//      font-size: 1.1em;
+//    }
+//  }
+//
+//  .widget-heading-performance {
+//    border-bottom: 0px solid $dash-widget-heading-border;
+//    color: $dash-widget-heading-text;
+//    letter-spacing: .1em;
+//    padding-bottom: .5em;
+//    margin-bottom: 1.75em;
+//
+//    @include text-lg;
+//    @include border-top-radius($dash-widget-border-radius);
+//
+//    .widget-settings-icon {
+//      @include transition(color 300ms ease);
+//
+//      &:hover {
+//        color: $dash-dashboard-text-hover;
+//      }
+//    }
+//
+//    .last-updated {
+//      font-size: 1.1em;
+//    }
+//  }
+//
+//  // sections of widgets should have the same widget markup
+//  // but may be styled slightly differently
+//  .widget-body .widget {
+//    padding: 0;
+//
+//    .widget-heading {
+//      border-bottom-color: $dash-widget-sub-heading-border;
+//      @include text-standard;
+//      text-transform: uppercase;
+//    }
+//  }
+//
+//  // when widget hasn't yet been configured
+//  .widget-body-config {
+//    background: $dash-widget-section-highlight;
+//    border: .5em dashed $dash-state-config-text;
+//    border-radius: 1em;
+//    color: $dash-state-config-text;
+//    display: none;
+//    font-size: 2em;
+//    line-height: 2.4em;
+//    margin: 1em 0;
+//    padding: 2em;
+//    text-align: center;
+//
+//    .fa {
+//      border: 2px solid $dash-state-config-text;
+//      margin-bottom: .75em;
+//      padding: .6em .5em;
+//      @include border-radius(50%);
+//
+//      @include transition(border-color 300ms linear);
+//    }
+//
+//
+//    @include transition(#{"all 300ms linear"});
+//  }
+//
+//  // changes when not yet configured
+//  &.configure {
+//    .widget-settings-icon {
+//      display: none;
+//    }
+//
+//    .widget-body-main {
+//      display: none;
+//    }
+//
+//    .widget-body-config {
+//      display: block;
+//
+//      &:hover {
+//        background-color: $dash-state-config-bg-hover;
+//        border-color: $dash-state-config-text-hover;
+//        color: $dash-state-config-text-hover;
+//
+//        .fa {
+//          border-color: $dash-state-config-text-hover;
+//        }
+//      }
+//    }
+//  }
+//
+//  // // styles when in an alert state
+//  // &.alert {
+//  //     #gradient > @include vertical(lighten($dash-widget-alert-bg, 10%), darken($dash-widget-alert-bg, 10%));
+//  //     color: $dash-widget-alert-text;
+//
+//  //     .widget-heading {
+//  //         border-bottom-color: $dash-widget-alert-heading-border;
+//  //         color: $dash-widget-alert-text;
+//  //     }
+//  // }
+//}

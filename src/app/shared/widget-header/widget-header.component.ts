@@ -12,6 +12,7 @@ import {AuditModalComponent} from '../modals/audit-modal/audit-modal.component';
 import {DeleteConfirmModalComponent} from '../modals/delete-confirm-modal/delete-confirm-modal.component';
 import {WidgetState} from './widget-state';
 import {AuthService} from '../../core/services/auth.service';
+// @ts-ignore
 import moment from 'moment';
 
 @Component({
@@ -99,6 +100,7 @@ export class WidgetHeaderComponent implements OnInit {
     if (!newWidgetConfig) {
       return;
     }
+
     // Take the current config and prepare it for saving
     const newWidgetConfig$ = this.widgetComponent.getCurrentWidgetConfig().pipe(
       map( widgetConfig => {
@@ -292,7 +294,6 @@ export class WidgetHeaderComponent implements OnInit {
       case 'Security Analysis': { collectorType = 'StaticSecurityScan'; break; }
       case 'Open Source': { collectorType = 'LibraryPolicy'; break; }
       case 'Test': { collectorType = 'Test'; break; }
-      case 'Infra Scan': { collectorType = 'InfrastructureScan'; break; }
       default: { collectorType = ''; break; }
     }
     return collectorType;

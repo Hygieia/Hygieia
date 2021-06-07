@@ -1,13 +1,13 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["codelyzer", "tslint:recommended", "tslint-config-swimlane/base", "tslint-config-prettier"],
   "rulesDirectory": [
-    "codelyzer"
+    "node_modules/codelyzer"
   ],
   "rules": {
-    "array-type": false,
+    "array-type": [true, "array-simple"],
     "arrow-parens": false,
     "deprecation": {
-      "severity": "warn"
+      "severity": "warning"
     },
     "import-blacklist": [
       true,
@@ -31,6 +31,7 @@
         ]
       }
     ],
+    "no-any":false,
     "no-consecutive-blank-lines": false,
     "no-console": [
       true,
@@ -41,6 +42,8 @@
       "trace"
     ],
     "no-empty": false,
+    "no-floating-promises": false,
+    "no-implicit-dependencies": [false, "dev"],
     "no-inferrable-types": [
       true,
       "ignore-params"

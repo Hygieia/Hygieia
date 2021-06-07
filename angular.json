@@ -17,6 +17,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+                 "ajv",
+                 "codemirror",
+                 "lodash",
+                 "moment-timezone",
+                 "mousetrap",
+                 "rxjs/internal/operators/map",
+                 "util"
+            ],
             "outputPath": "dist/hygieia-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,8 +41,7 @@
               "src/styles.scss",
               "src/variables.scss"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {

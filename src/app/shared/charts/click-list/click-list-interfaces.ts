@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
+import { Type } from "@angular/core";
 
 export enum DashStatus {
   IGNORE,
@@ -7,13 +7,14 @@ export enum DashStatus {
   WARN,
   FAIL,
   UNAUTH,
-  CRITICAL
+  CRITICAL,
 }
 
 export interface IClickListData {
   items: IClickListItem[];
   clickableContent: Type<any>;
   clickableHeader: Type<any>;
+  colorScheme?: {};
 }
 
 export interface IClickListItem {
@@ -22,12 +23,8 @@ export interface IClickListItem {
   title: string;
   subtitles: any[];
   url: string;
+  textColor?: string;
 }
-
-export interface IClickListItemMetric extends IClickListItem {
-  instances?: any;
-}
-
 
 export interface IClickListItemBuild extends IClickListItem {
   buildStatus: string;
@@ -50,12 +47,6 @@ export interface IClickListItemStaticAnalysis extends IClickListData {
   timestamp?: any;
 }
 
-export interface IClickListItemSecurityScan extends IClickListData {
-  url: string;
-  name?: string;
-  timestamp?: any;
-}
-
 export interface IClickListItemTest extends IClickListItem {
   timestamp: string;
   description: string;
@@ -67,8 +58,4 @@ export interface IClickListItemOSS extends IClickListItem {
   url: string;
   components: string[];
   lastUpdated: number;
-}
-
-export interface IClickListItemInfra extends IClickListItem {
-  vulnerability: any;
 }

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {DashboardService} from '../../../shared/dashboard.service';
-import {take} from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { DashboardService } from "../../../shared/dashboard.service";
+import { take } from "rxjs/operators";
 
 export interface IPieData {
   name: string;
@@ -8,9 +8,9 @@ export interface IPieData {
 }
 
 @Component({
-  selector: 'app-dashboard-count',
-  templateUrl: './dashboard-count.component.html',
-  styleUrls: ['./dashboard-count.component.scss']
+  selector: "app-dashboard-count",
+  templateUrl: "./dashboard-count.component.html",
+  styleUrls: ["./dashboard-count.component.scss"],
 })
 export class DashboardCountComponent implements OnInit {
   dCount: IPieData[] = [];
@@ -19,10 +19,10 @@ export class DashboardCountComponent implements OnInit {
   // options
   gradient = true;
   showLegend = false;
-  label = ' Total dashboards';
+  label = " Total dashboards";
 
   colorScheme = {
-    domain: ['green', 'brown']
+    domain: ["green", "brown"],
   };
 
   constructor(private dashboardService: DashboardService) {
@@ -33,9 +33,11 @@ export class DashboardCountComponent implements OnInit {
 
   private loadCounts() {
     const counts = new Set();
-    this.dashboardService.dashboardCountConfig$.pipe(take(2)).subscribe(count => {
-      counts.add(count);
-      this.dCount = [...counts];
-    });
+    this.dashboardService.dashboardCountConfig$
+      .pipe(take(2))
+      .subscribe((count) => {
+        counts.add(count);
+        this.dCount = [...counts] as IPieData[];
+      });
   }
 }

@@ -6,20 +6,22 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ContentChild,
-  TemplateRef
-} from '@angular/core';
-import { scaleBand, scaleLinear } from 'd3-scale';
+  TemplateRef,
+} from "@angular/core";
+import { scaleBand, scaleLinear } from "d3-scale";
 import {
   BaseChartComponent,
   calculateViewDimensions,
   ColorHelper,
+  LegendPosition,
+  ScaleType,
   ViewDimensions,
-} from '@swimlane/ngx-charts';
+} from "@swimlane/ngx-charts";
 
 // This component is based on the pie grid chart example from ngx-charts.
 // https://github.com/swimlane/ngx-charts/blob/master/projects/swimlane/ngx-charts/src/lib/bar-chart/bar-horizontal.component.ts
 @Component({
-  selector: 'app-bar-horizontal-chart',
+  selector: "app-bar-horizontal-chart",
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
@@ -86,13 +88,13 @@ import {
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./bar-horizontal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ["./bar-horizontal.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BarHorizontalComponent extends BaseChartComponent {
   @Input() legend = false;
-  @Input() legendTitle = 'Legend';
-  @Input() legendPosition = 'right';
+  @Input() legendTitle = "Legend";
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis = false;
   @Input() yAxis = false;
   @Input() showXAxisLabel = false;
@@ -103,7 +105,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType: string;
+  @Input() schemeType: ScaleType;
   @Input() trimXAxisTicks = true;
   @Input() trimYAxisTicks = true;
   @Input() rotateXAxisTicks = true;
@@ -125,7 +127,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate', { static: true }) tooltipTemplate: TemplateRef<any>;
+  @ContentChild("tooltipTemplate", { static: true })
+  tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   yScale: any;
@@ -147,7 +150,12 @@ export class BarHorizontalComponent extends BaseChartComponent {
       this.dataLabelMaxWidth = { negative: 0, positive: 0 };
     }
 
-    this.margin = [10, 20 + this.dataLabelMaxWidth.positive, 10, 20 + this.dataLabelMaxWidth.negative];
+    this.margin = [
+      10,
+      20 + this.dataLabelMaxWidth.positive,
+      10,
+      20 + this.dataLabelMaxWidth.negative,
+    ];
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -161,7 +169,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
       legendType: this.schemeType,
-      legendPosition: this.legendPosition
+      legendPosition: this.legendPosition,
     });
 
     this.formatDates();
@@ -178,28 +186,38 @@ export class BarHorizontalComponent extends BaseChartComponent {
   getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = scaleLinear().range([0, this.dims.width]).domain(this.xDomain);
+    const scale = scaleLinear()
+      .range([0, this.dims.width])
+      .domain(this.xDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
-    const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
+    const spacing =
+      this.yDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return scaleBand().rangeRound([0, this.dims.height]).paddingInner(spacing).domain(this.yDomain);
+    return scaleBand()
+      .rangeRound([0, this.dims.height])
+      .paddingInner(spacing)
+      .domain(this.yDomain);
   }
 
   getXDomain(): any[] {
-    const values = this.results.map(d => d.value);
-    const min = this.xScaleMin ? Math.min(this.xScaleMin, ...values) : Math.min(0, ...values);
+    const values = this.results.map((d) => d.value);
+    const min = this.xScaleMin
+      ? Math.min(this.xScaleMin, ...values)
+      : Math.min(0, ...values);
 
-    const max = this.xScaleMax ? Math.max(this.xScaleMax, ...values) : Math.max(0, ...values);
+    const max = this.xScaleMax
+      ? Math.max(this.xScaleMax, ...values)
+      : Math.max(0, ...values);
     return [min, max];
   }
 
   getYDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   onClick(data): void {
@@ -208,13 +226,18 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.yDomain;
     } else {
       domain = this.xDomain;
     }
 
-    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    this.colors = new ColorHelper(
+      this.scheme,
+      this.schemeType,
+      domain,
+      this.customColors
+    );
   }
 
   getLegendOptions() {
@@ -223,9 +246,9 @@ export class BarHorizontalComponent extends BaseChartComponent {
       colors: undefined,
       domain: [],
       title: undefined,
-      position: this.legendPosition
+      position: this.legendPosition,
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.yDomain;
       opts.colors = this.colors;
       opts.title = this.legendTitle;
@@ -249,9 +272,15 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   onDataLabelMaxWidthChanged(event) {
     if (event.size.negative) {
-      this.dataLabelMaxWidth.negative = Math.max(this.dataLabelMaxWidth.negative, event.size.width);
+      this.dataLabelMaxWidth.negative = Math.max(
+        this.dataLabelMaxWidth.negative,
+        event.size.width
+      );
     } else {
-      this.dataLabelMaxWidth.positive = Math.max(this.dataLabelMaxWidth.positive, event.size.width);
+      this.dataLabelMaxWidth.positive = Math.max(
+        this.dataLabelMaxWidth.positive,
+        event.size.width
+      );
     }
     if (event.index === this.results.length - 1) {
       setTimeout(() => this.update());
@@ -259,7 +288,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -267,8 +296,12 @@ export class BarHorizontalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (
+        d.name === item.name &&
+        d.value === item.value &&
+        d.series === item.series
+      );
     });
     if (idx > -1) {
       return;
@@ -279,7 +312,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -287,8 +320,12 @@ export class BarHorizontalComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (
+        d.name === item.name &&
+        d.value === item.value &&
+        d.series === item.series
+      );
     });
 
     this.activeEntries.splice(idx, 1);

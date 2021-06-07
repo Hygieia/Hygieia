@@ -1,0 +1,58 @@
+<form [formGroup]="productConfigForm" (ngSubmit)="submitForm()">
+  <div class="modal-body">
+    <div class="container">
+      <div class="form-group">
+        <label class="col-form-label" for="productJob">Product Job <span class="required-text"> *</span></label>
+        <input id="productJob" type="search" class="form-control"
+               [class.is-invalid]="((configForm.productJob.dirty || configForm.productJob.touched) && configForm.productJob.errors) || searchFailed"
+               formControlName="productJob"
+               [ngbTypeahead]="typeAheadResults"
+               [inputFormatter]="getProductTitle"
+               [resultFormatter]="getProductTitle"
+               placeholder="Product Job" required/>
+        <span *ngIf="searching">searching...</span>
+        <div class="invalid-feedback" *ngIf="!searchFailed || configForm.productJob.value === ''">Please provide a product job.</div>
+        <div class="invalid-feedback" *ngIf="searchFailed && !searching && configForm.productJob.value !== ''">Sorry, suggestions could not be loaded.</div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="productDurationThreshold">Product Duration Threshold <span class="required-text"> *</span></label>
+        <div class="input-group mb-3">
+          <input id="productDurationThreshold" type="text" class="form-control" placeholder="Product Duration Threshold" aria-label="Product Duration Threshold"
+            aria-describedby="minutes-label" formControlName="productDurationThreshold"
+                 [class.is-invalid]="((configForm.productDurationThreshold.dirty || configForm.productDurationThreshold.touched) && configForm.productDurationThreshold.errors)"
+                 required>
+          <div class="input-group-append">
+            <span class="input-group-text" id="minutes-label">minutes</span>
+          </div>
+          <div class="invalid-feedback" *ngIf="configForm.productDurationThreshold.value === ''">Please provide a product duration threshold.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="consecutive-failure-threshold">Alert Takeover Criteria <span class="required-text"> *</span></label>
+        <div class="input-group mb-3">
+          <input id="consecutive-failure-threshold" type="text" class="form-control" placeholder="Alert Takeover Criteria" aria-label="Alert Takeover Criteria"
+            aria-describedby="consecutive-product-fails" formControlName="consecutiveFailureThreshold"
+                 [class.is-invalid]="((configForm.consecutiveFailureThreshold.dirty
+                  || configForm.consecutiveFailureThreshold.touched)
+                   && configForm.consecutiveFailureThreshold.errors)"
+                 required>
+          <div class="input-group-append">
+            <span class="input-group-text" id="consecutive-product-fails">consecutive product fails</span>
+          </div>
+          <div class="invalid-feedback" *ngIf="configForm.consecutiveFailureThreshold.value === ''">Please provide a consecutive failure threshold.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-primary" [disabled]="!productConfigForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

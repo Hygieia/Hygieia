@@ -30,8 +30,6 @@ import {PropertiesBuilderComponent} from './dashboard/admin-dashboard/properties
 import {CreateOrUpdateApiPropertiesComponent} from './dashboard/admin-dashboard/modal/create-or-update-api-properties/create-or-update-api-properties.component';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateApiAuditPropertiesComponent} from './dashboard/admin-dashboard/modal/create-or-update-api-audit-properties/create-or-update-api-audit-properties.component';
-import { CollectorsComponent } from './dashboard/admin-dashboard/collectors/collectors.component';
-import { MatIconModule, MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -46,7 +44,6 @@ import { MatIconModule, MatTableModule } from '@angular/material';
     ServiceAccountsComponent,
     EditDashboardComponent,
     PropertiesBuilderComponent,
-    CollectorsComponent,
     CreateOrUpdateApiPropertiesComponent,
     CreateOrUpdateApiAuditPropertiesComponent
   ],
@@ -67,8 +64,6 @@ import { MatIconModule, MatTableModule } from '@angular/material';
     NgbModule,
     ReactiveFormsModule,
     SharedModule,
-    MatTableModule,
-    MatIconModule
   ],
   entryComponents: [
     CreateOrUpdateFeatureFlagsComponent,

@@ -1,5 +1,5 @@
-@import '../../../styles/css/dashvariables.scss';
-@import '../../../styles/css/mixins.scss';
+@import "../../../styles/css/dashvariables.scss";
+@import "../../../styles/css/mixins.scss";
 
 .widget-container-small {
   font-size: 13px;
@@ -14,17 +14,17 @@
 // WIDGET
 // ========================================
 .widget {
-  padding: 2.5em 3em;
+  padding: 1.5em 2em;
   @include border-radius($dash-widget-border-radius);
 
   .widget {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
 
   // heading in a widget
   .widget-heading {
-    letter-spacing: .1em;
-    padding-bottom: .5em;
+    letter-spacing: 0.1em;
+    padding-bottom: 0.5em;
     margin-bottom: 1em;
 
     @include text-lg;
@@ -52,7 +52,6 @@
       color: $dash-dashboard-text-hover;
     }
 
-
     .last-updated {
       font-size: 1.1em;
     }
@@ -61,8 +60,8 @@
   .widget-heading-performance {
     border-bottom: 0px solid $dash-widget-heading-border;
     color: $dash-widget-heading-text;
-    letter-spacing: .1em;
-    padding-bottom: .5em;
+    letter-spacing: 0.1em;
+    padding-bottom: 0.5em;
     margin-bottom: 1.75em;
 
     @include text-lg;
@@ -93,7 +92,7 @@
 
   .widget-body-config {
     background: $dash-widget-section-highlight;
-    border: .2em $dash-state-config-text;
+    border: 0.2em $dash-state-config-text;
     border-radius: 1em;
     color: $dash-state-config-text;
     display: none;
@@ -106,7 +105,7 @@
     .fa {
       border: 2px solid $dash-state-config-text;
       //margin-bottom: .75em;
-      padding: .45em .4em;
+      padding: 0.45em 0.4em;
       @include border-radius(50%);
 
       @include transition(border-color 300ms linear);

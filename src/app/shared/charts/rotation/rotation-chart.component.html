@@ -2,10 +2,14 @@
   {{title}}
 </div>
 
-<ngb-tabset [destroyOnHide]="false">
+<nav ngbNav #nav="ngbNav" class="nav-tabs" >
+<!--<ngb-tabset [destroyOnHide]="false">-->
   <li *ngFor="let indivItem of data?.items">
-    <ngb-tab title="{{indivItem[0]?.type}}" [disabled]="unlockTabs(indivItem[0].agileType, indivItem[0].type) !== true">
-      <ng-template ngbTabContent>
+    <ng-container ngbNavItem [disabled]="unlockTabs(indivItem[0].agileType, indivItem[0].type) !== true">
+      <a ngbNavLink>"{{indivItem[0]?.type}}"</a>
+      <ng-template ngbNavContent>  
+    <!-- <ngb-tab title="{{indivItem[0]?.type}}" [disabled]="unlockTabs(indivItem[0].agileType, indivItem[0].type) !== true">-->
+      <!--<ng-template ngbTabContent>-->
         <table class="table table-hover" [ngClass]="{'table-hover': data?.clickableContent}">
           <tr class="dash-row clickable" *ngFor="let item of indivItem" [ngClass]="{'clickable': data?.clickableContent}">
             <td><span class="list-item-title">{{item?.title}}</span></td>
@@ -33,6 +37,7 @@
           </tr>
         </table>
       </ng-template>
-    </ngb-tab>
+    </ng-container>
   </li>
-</ngb-tabset>
+</nav>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

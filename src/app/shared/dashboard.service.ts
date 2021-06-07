@@ -168,15 +168,20 @@ export class DashboardService {
     tempDashboard$.subscribe(dashboard => this.dashboardSubject.next(dashboard));
   }
 
-  checkCollectorItemTypeExist(ciType: string): boolean {
+  checkCollectorItemTypeExist(ciType: string) {
     let collectorItems;
     let exists = false;
     this.dashboardConfig$.pipe(take(1), map(dashboard => dashboard)).subscribe(dashboard => {
       dashboard.application.components.forEach((component: any, index: number) => {
         collectorItems = dashboard.application.components[index].collectorItems;
-        exists = Object.keys(collectorItems).some(type => type === ciType);
+        for (const key in collectorItems) {
+          if (key === ciType) {
+            exists = true;
+          }
+        }
       });
     });
+
     return exists;
   }
 

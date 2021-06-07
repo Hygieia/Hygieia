@@ -1,5 +1,5 @@
-@import '../css/dashvariables.scss';
-@import '../css/mixins.scss';
+@import "../css/dashvariables.scss";
+@import "../css/mixins.scss";
 
 // CHART TITLES --
 .widget {
@@ -8,17 +8,15 @@
   .chart-heading {
     border-bottom: 1px solid;
     color: $dash-widget-heading-text;
-    letter-spacing: .1em;
-    padding-bottom: .5em;
-    margin-bottom: 1em;
+    letter-spacing: 0.1em;
+    padding-bottom: 0.2em;
+    margin-bottom: 0.5em;
 
     @include border-top-radius($dash-widget-border-radius);
     border-bottom-color: $dash-widget-sub-heading-border;
     @include text-standard;
     text-transform: uppercase;
   }
-
-
 }
 
 .dash-overflow {
@@ -44,14 +42,13 @@ $color-bg-lighter: #5b6882;
 */
 $color-text-dark: #72809b;
 $color-text-med-dark: #919db5;
-$color-text-med: #A0AABE;
+$color-text-med: #a0aabe;
 $color-text-med-light: #d9dce1;
 $color-text-light: #f0f1f6;
 $color-text-lighter: #fff;
 
 .dark-chart-theme {
   .ngx-charts {
-
     text {
       fill: $color-text-med;
     }
@@ -138,7 +135,6 @@ $color-text-lighter: #fff;
     .polar-chart .polar-chart-background {
       fill: rgb(30, 34, 46);
     }
-
   }
 
   .chart-legend {
@@ -183,5 +179,4 @@ $color-text-lighter: #fff;
     font-size: 0.8em;
     color: $color-text-med;
   }
-
 }

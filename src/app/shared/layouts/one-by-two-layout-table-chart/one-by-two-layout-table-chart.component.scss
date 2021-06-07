@@ -3,7 +3,7 @@
   width: 400px;
 }
 
-.divTable{
+.divTable {
   display: table;
   width: 100%;
 }
@@ -18,7 +18,9 @@
 
 .header-text {
   font-weight: bold;
-  color: dimgrey;
+  color: greenyellow; // dimgrey;
+  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .divTableBody {
@@ -26,13 +28,13 @@
 }
 
 #commits {
-  color: #04eeff
+  color: #04eeff;
 }
 
 #pull {
-  color: #04eb0f
+  color: #04eb0f;
 }
 
 #issues {
-  color: red
+  color: red;
 }

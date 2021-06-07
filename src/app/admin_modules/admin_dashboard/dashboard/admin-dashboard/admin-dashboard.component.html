@@ -13,8 +13,6 @@
                               (click)="navigateToTab('featureflags')">Feature Flags</a></li>
       <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'propertiesconfig'}"
                               (click)="navigateToTab('propertiesconfig')">Properties Configuration</a></li>
-      <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'collectors'}"
-                              (click)="navigateToTab('collectors')">View Collectors</a></li>
     </ul>
   </div>
   <div class="container-fluid">
@@ -40,9 +38,6 @@
       </div>
       <div *ngIf="tab === 'propertiesconfig'">
         <app-properties-builder></app-properties-builder>
-      </div>
-      <div *ngIf="tab === 'collectors'">
-        <app-collectors></app-collectors>
       </div>
     </div>
   </div>

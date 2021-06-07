@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {map, take} from 'rxjs/operators';
 import { CollectorService } from 'src/app/shared/collector.service';
-import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap } from 'rxjs/operators';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 
 @Component({
@@ -18,19 +17,6 @@ export class RepoConfigFormComponent implements OnInit {
 
   repoConfigForm: FormGroup;
   scm = [];
-  searching = false;
-  searchFailed = false;
-  submitFailed = false;
-  typeAheadResults: (text$: Observable<string>) => Observable<any>;
-
-
-  getRepoTitle = (collectorItem: any) => {
-    if (!collectorItem) {
-      return '';
-    }
-    const repoUrl = (collectorItem.options.url as string);
-    return repoUrl;
-  }
 
   @Input()
   set widgetConfig(widgetConfig: any) {
@@ -56,28 +42,6 @@ export class RepoConfigFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.typeAheadResults = (text$: Observable<string>) =>
-      text$.pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        tap(() => this.searching = true),
-        switchMap(term => {
-          return term.length < 2 ? of([]) :
-            this.collectorService.searchItemsBySearchField('scm', term, 'options.url').pipe(
-              tap(val => {
-                if (!val || val.length === 0) {
-                  this.searchFailed = true;
-                  return of([]);
-                }
-                this.searchFailed = false;
-              }),
-              catchError(() => {
-                this.searchFailed = true;
-                return of([]);
-              }));
-        }),
-        tap(() => this.searching = false)
-      );
     this.getDashboardComponent();
   }
 
@@ -95,52 +59,30 @@ export class RepoConfigFormComponent implements OnInit {
       const scmTools = scmCollectors.map(currSCMTool => currSCMTool.name);
       const result = [];
       for (const currTool of scmTools) {
-        result.push({ type: currTool });
+        result.push({type: currTool});
       }
       this.scm = result;
     });
   }
 
   public submitForm() {
-    // if repoUrl is just a string it's not a valid url
-    if (!this.repoConfigForm.value.url.options) {
-      this.submitFailed = true;
-      return;
-    }
-
-    const repoUrl = this.repoConfigForm.value.url.options.url;
-    this.collectorService.searchItemsBySearchField('scm', repoUrl, 'options.url').subscribe(repoArray => {
-      if (!repoArray || repoArray.length === 0) {
-        this.submitFailed = true;
-        return;
-      }
-      repoArray.forEach(repo => {
-        if (repo.options.branch === this.repoConfigForm.value.branch && repo.options.url === repoUrl) {
-          const newConfig = {
-            name: 'repo',
-            componentId: this.componentId,
-            collectorItemId: repo.id,
-            options: {
-              id: this.widgetConfigId ? this.widgetConfigId : 'repo0',
-              scm: {
-                name: this.repoConfigForm.value.scm,
-                value: this.repoConfigForm.value.scm,
-              },
-              url: this.repoConfigForm.value.url,
-              branch: this.repoConfigForm.value.branch,
-              userID: this.repoConfigForm.value.userID,
-              password: this.repoConfigForm.value.password,
-              personalAccessToken: this.repoConfigForm.value.personalAccessToken
-            },
-          };
-          this.activeModal.close(newConfig);
-          return;
-        }
-      });
-
-      this.submitFailed = true;
-    });
-
+    const newConfig = {
+      name: 'repo',
+      componentId: this.componentId,
+      options: {
+        id: this.widgetConfigId ? this.widgetConfigId : 'repo0',
+        scm: {
+          name: this.repoConfigForm.value.scm,
+          value: this.repoConfigForm.value.scm,
+        },
+        url: this.repoConfigForm.value.url,
+        branch: this.repoConfigForm.value.branch,
+        userID: this.repoConfigForm.value.userID,
+        password: this.repoConfigForm.value.password,
+        personalAccessToken: this.repoConfigForm.value.personalAccessToken
+      },
+    };
+    this.activeModal.close(newConfig);
   }
 
   private getDashboardComponent() {

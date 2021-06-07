@@ -1,0 +1,32 @@
+@import "../../../../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-column-gap: 2em;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.template-item {
+  display: grid;
+  align-self: stretch;
+}
+
+nb-card {
+  background-color: transparent;
+  box-shadow: 0px 2px 24px 2px rgb(0, 0, 0.1);
+  margin-bottom: 0;
+}
+
+nb-card:last-of-type {
+  margin-bottom: 2em;
+}
+
+div .search-i {
+  color: #00a33c;
+  background-color: #00a33c;
+}

@@ -10,11 +10,9 @@ import { DashboardService } from 'src/app/shared/dashboard.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { StaticAnalysisService } from '../static-analysis.service';
-import { IStaticAnalysis, IStaticAnalysisResponse } from '../interfaces';
+import { IStaticAnalysis } from '../interfaces';
 import { StaticAnalysisWidgetComponent} from './static-analysis-widget.component';
 import {StaticAnalysisModule} from '../static-analysis.module';
-import { ICollItem } from 'src/app/viewer_modules/collector-item/interfaces';
-
 
 class MockStaticAnalysisService {
 
@@ -33,45 +31,8 @@ class MockStaticAnalysisService {
     lastUpdated: 1553613455230
   };
 
-  mockCollectorItemArray: ICollItem[] = [
-    {
-      collectorId: '5991223442ff4e0d3c1485c1',
-      description: 'identity-profile-preferences-master',
-      enabled: true,
-      errorCount: 0,
-      errors: [],
-      id: '5cba241bb0dd131c5f3eeb34',
-      lastUpdated: 1619112848762,
-      options: {
-        dashboardId: 'id',
-        jobName: 'jobName',
-        jobUrl: 'joburl.com',
-        instanceUrl: 'instanceurl.com',
-        branch: 'development',
-        url: 'url.com',
-        repoName: 'identitygithub.com',
-        path: '/test',
-        artifactName: 'artifactTest',
-        password: 'pswrd',
-        personalAccessToken: 'token'
-      },
-      pushed: false,
-      refreshLink: '/static/refresh?projectName=identity-profile-preferences-master',
-      niceName: 'nicename',
-      environment: 'env'
-    }
-  ];
-
-  getStaticAnalysisCollectorItems(componentId: string): Observable<ICollItem[]> {
-    return of(this.mockCollectorItemArray as ICollItem[]);
-  }
-
-  refreshProject() {
-    return 'Successfully refreshed';
-  }
-
-  getCodeQuality(componentId, collectorItemId: string): Observable<IStaticAnalysisResponse> {
-    return of(this.mockStaticAnalysisData as IStaticAnalysisResponse);
+  fetchStaticAnalysis(): Observable<IStaticAnalysis[]> {
+    return of(this.mockStaticAnalysisData.result);
   }
 }
 
@@ -90,34 +51,6 @@ describe('StaticAnalysisWidgetComponent', () => {
   let modalService: NgbModal;
   let fixture: ComponentFixture<StaticAnalysisWidgetComponent>;
 
-  const mockCollectorItemArray: ICollItem[] = [
-    {
-      collectorId: '5991223442ff4e0d3c1485c1',
-      description: 'identity-profile-preferences-master',
-      enabled: true,
-      errorCount: 0,
-      errors: [],
-      id: '5cba241bb0dd131c5f3eeb34',
-      lastUpdated: 1619112848762,
-      options: {
-        dashboardId: 'id',
-        jobName: 'jobName',
-        jobUrl: 'joburl.com',
-        instanceUrl: 'instanceurl.com',
-        branch: 'development',
-        url: 'url.com',
-        repoName: 'identitygithub.com',
-        path: '/test',
-        artifactName: 'artifactTest',
-        password: 'pswrd',
-        personalAccessToken: 'token'
-      },
-      pushed: false,
-      refreshLink: '/security/refresh?projectName=identity-profile-preferences-master',
-      niceName: 'nicename',
-      environment: 'env'
-    }
-  ];
   const staticAnalysisTestData = {
     id: '123',
     collectorItemId: '123',
@@ -234,20 +167,6 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngOnInit();
   });
 
-  it('should return empty on refresh if !hasData', () => {
-    (component as any).params = { componentId: '1234' };
-    component.loadCharts(mockCollectorItemArray, 0);
-    component.hasData = false;
-    component.refreshProject();
-  });
-
-  it('should not assign default if it has data', () => {
-    component.charts = [];
-    component.hasData = true;
-    component.setDefaultIfNoData();
-    expect(component.charts).toEqual([]);
-  });
-
   it('should set initial value of widgetId, layout, and charts', () => {
     component.ngOnInit();
     expect(component.widgetId).toBeDefined();
@@ -277,8 +196,6 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngAfterViewInit();
   });
 
-
-
   it('should hit startRefreshInterval', () => {
     const mockConfig = {
       name: 'codeanalysis',
@@ -290,7 +207,7 @@ describe('StaticAnalysisWidgetComponent', () => {
     };
 
     spyOn(component, 'getCurrentWidgetConfig').and.returnValues(of(mockConfig), of(mockConfig), of(null));
-    spyOn(staticAnalysisService, 'getStaticAnalysisCollectorItems').and.returnValues(of(mockCollectorItemArray), of([]));
+    spyOn(staticAnalysisService, 'fetchStaticAnalysis').and.returnValues(of([staticAnalysisTestData]), of([]));
     spyOn(dashboardService, 'checkCollectorItemTypeExist').and.returnValues(true, false);
     component.startRefreshInterval();
     component.startRefreshInterval();

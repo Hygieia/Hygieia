@@ -6,30 +6,42 @@ import {
   ContentChild,
   TemplateRef,
   Output,
-  EventEmitter
-} from '@angular/core';
-import { min } from 'd3-array';
-import { format } from 'd3-format';
+  EventEmitter,
+} from "@angular/core";
+
+import { min } from "d3-array";
+import { format } from "d3-format";
 
 import {
   ViewDimensions,
   ColorHelper,
+  ChartComponent,
   BaseChartComponent,
   calculateViewDimensions,
+  LegendPosition,
+  ScaleType,
   trimLabel,
   gridLayout,
-  formatLabel
-} from '@swimlane/ngx-charts';
-import { DataItem } from './data-item.interfaces';
+  formatLabel,
+} from "@swimlane/ngx-charts";
+import { DataItem } from "./data-item.interfaces";
 
 // This component is based on the pie grid chart example from ngx-charts.
 // https://github.com/swimlane/ngx-charts/blob/master/projects/swimlane/ngx-charts/src/lib/pie-chart/pie-grid.component.ts
 @Component({
-  selector: 'app-pie-grid',
+  selector: "app-pie-grid",
   template: `
-    <ngx-charts-chart [view]="[width, height]" [showLegend]="false" [animations]="animations">
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="false"
+      [animations]="animations"
+    >
       <svg:g [attr.transform]="transform" class="pie-grid chart">
-        <svg:g *ngFor="let series of series" class="pie-grid-item" [attr.transform]="series.transform">
+        <svg:g
+          *ngFor="let series of series"
+          class="pie-grid-item"
+          [attr.transform]="series.transform"
+        >
           <svg:g
             ngx-charts-pie-grid-series
             [colors]="series.colors"
@@ -42,7 +54,9 @@ import { DataItem } from './data-item.interfaces';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipTemplate ? undefined : tooltipText({ data: series })"
+            [tooltipTitle]="
+              tooltipTemplate ? undefined : tooltipText({ data: series })
+            "
             [tooltipTemplate]="tooltipTemplate"
             [tooltipContext]="series.data[0].data"
             (activate)="onActivate($event)"
@@ -67,7 +81,8 @@ import { DataItem } from './data-item.interfaces';
             x="0"
             y="5"
             text-anchor="middle"
-            alignment-baseline="central">
+            alignment-baseline="central"
+          >
             {{ series.percent.toLocaleString() }}
           </svg:text>
           <svg:text class="label" dy="0.5em" x="0" y="5" text-anchor="middle">
@@ -98,15 +113,15 @@ import { DataItem } from './data-item.interfaces';
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['./pie-grid.component.scss'],
+  styleUrls: ["./pie-grid.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;
   @Input() tooltipDisabled = false;
   @Input() tooltipText: (o: any) => any;
-  @Input() label = 'Total';
+  @Input() label = "Total";
   @Input() minWidth = 150;
   @Input() activeEntries: any[] = [];
   @Input() customLabelValue: number;
@@ -123,7 +138,8 @@ export class PieGridComponent extends BaseChartComponent {
   colorScale: ColorHelper;
   margin = [20, 20, 20, 20];
 
-  @ContentChild('tooltipTemplate', {static: false}) tooltipTemplate: TemplateRef<any>;
+  @ContentChild("tooltipTemplate", { static: false })
+  tooltipTemplate: TemplateRef<any>;
 
   update(): void {
     super.update();
@@ -131,14 +147,19 @@ export class PieGridComponent extends BaseChartComponent {
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
-      margins: this.margin
+      margins: this.margin,
     });
 
     this.formatDates();
 
     this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, this.results, this.minWidth, this.designatedTotal);
+    this.data = gridLayout(
+      this.dims,
+      this.results,
+      this.minWidth,
+      this.designatedTotal
+    );
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
@@ -157,26 +178,27 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    return this.results.map(d => d.label);
+    return this.results.map((d) => d.label);
   }
 
   getSeries(): any[] {
     const total = this.designatedTotal ? this.designatedTotal : this.getTotal();
 
-    return this.data.map(d => {
+    return this.data.map((d) => {
       const baselineLabelHeight = 20;
       const padding = 10;
       const name = d.data.name;
       const label = formatLabel(name);
       const value = d.data.value;
-      const radius = min([d.width - padding, d.height - baselineLabelHeight]) / 2 - 5;
+      const radius =
+        min([d.width - padding, d.height - baselineLabelHeight]) / 2 - 5;
       const innerRadius = radius * 0.9;
 
       let count = 0;
       const colors = () => {
         count += 1;
         if (count === 1) {
-          return 'rgba(100,100,100,0.3)';
+          return "rgba(100,100,100,0.3)";
         } else {
           return this.colorScale.getColor(label);
         }
@@ -192,25 +214,25 @@ export class PieGridComponent extends BaseChartComponent {
         outerRadius: radius,
         name,
         label: trimLabel(label),
-        total: (this.useCustomLabelValue ? this.customLabelValue : value),
+        total: this.useCustomLabelValue ? this.customLabelValue : value,
         value,
-        percent: format('.1%')(d.data.percent),
+        percent: format(".1%")(d.data.percent),
         data: [
           d,
           {
             data: {
               other: true,
               value: total - value,
-              name: d.data.name
-            }
-          }
-        ]
+              name: d.data.name,
+            },
+          },
+        ],
       };
     });
   }
 
   getTotal(): any {
-    return this.results.map(d => d.value).reduce((sum, d) => sum + d, 0);
+    return this.results.map((d) => d.value).reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data: DataItem): void {
@@ -218,11 +240,16 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colorScale = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colorScale = new ColorHelper(
+      this.scheme,
+      ScaleType.Ordinal,
+      this.domain,
+      this.customColors
+    );
   }
 
   onActivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -230,8 +257,12 @@ export class PieGridComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (
+        d.name === item.name &&
+        d.value === item.value &&
+        d.series === item.series
+      );
     });
     if (idx > -1) {
       return;
@@ -242,7 +273,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   onDeactivate(item, fromLegend = false) {
-    item = this.results.find(d => {
+    item = this.results.find((d) => {
       if (fromLegend) {
         return d.label === item.name;
       } else {
@@ -250,8 +281,12 @@ export class PieGridComponent extends BaseChartComponent {
       }
     });
 
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (
+        d.name === item.name &&
+        d.value === item.value &&
+        d.series === item.series
+      );
     });
 
     this.activeEntries.splice(idx, 1);

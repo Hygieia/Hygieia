@@ -1,22 +1,30 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CollectorItemService} from '../../collector-item.service';
-import {CollectorItemDetailsComponent} from '../collector-item-details/collector-item-details.component';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { Subscription } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { CollectorItemService } from "../../collector-item.service";
+import { CollectorItemDetailsComponent } from "../collector-item-details/collector-item-details.component";
 
 @Component({
-  selector: 'app-base-evidence',
-  templateUrl: './base-evidence.component.html',
-  styleUrls: ['./base-evidence.component.scss']
+  selector: "app-base-evidence",
+  templateUrl: "./base-evidence.component.html",
+  styleUrls: ["./base-evidence.component.scss"],
 })
 export class BaseEvidenceComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns = ['id', 'timestamp'];
+  displayedColumns = ["id", "timestamp"];
   dataSource: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   // Reference to the subscription used to refresh the viewer
   protected intervalRefreshSubscription: Subscription;
@@ -26,17 +34,19 @@ export class BaseEvidenceComponent implements OnInit, AfterViewInit, OnDestroy {
   protected componentId: string;
   collector: string;
 
-  constructor(private router: Router, private route: ActivatedRoute,
-              private modalService: NgbModal,
-              protected ciViewerService: CollectorItemService) {
-  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    protected ciViewerService: CollectorItemService
+  ) {}
 
   ngOnInit() {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.collectorEvidenceDetails);
 
-    this.dashboardTitle = this.route.snapshot.paramMap.get('dashboardTitle');
-    this.componentId = this.route.snapshot.paramMap.get('componentId');
+    this.dashboardTitle = this.route.snapshot.paramMap.get("dashboardTitle");
+    this.componentId = this.route.snapshot.paramMap.get("componentId");
     if (this.route.snapshot.url) {
       this.collector = this.route.snapshot.url[0].path;
     }
@@ -67,6 +77,6 @@ export class BaseEvidenceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openCollectorViewer(dTitle: string) {
-    this.router.navigate(['/collectorItem/viewer', {title : dTitle}]);
+    this.router.navigate(["/collectorItem/viewer", { title: dTitle }]);
   }
 }

@@ -51,8 +51,8 @@ export class SsoService {
       { headers: {'Content-Type': 'application/x-www-form-urlencoded'}, observe: 'response'})
       .subscribe(loggedIn => {
         const token = loggedIn.headers.get('x-authentication-token');
+        localStorage.setItem('access_token', token);
         if (token) {
-          localStorage.setItem('access_token', token);
           this.router.navigate(['/']);
         }
       }, error => throwError(error));

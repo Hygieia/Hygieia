@@ -1,0 +1,32 @@
+<div class="template-item" *ngFor="let widget of widgets;">
+  <div class="template-item" *ngIf="widget.component.length > 1; else elseblock">
+    <nb-card>
+      <nb-tabset>
+        <nb-tab *ngFor="let component of widget.component; let i = index;" tabTitle="{{widget.title[i]}}"
+                [active]="i === 0">
+          <nb-card>
+            <app-widget-header
+              [title]="widget.title[i]"
+              [widgetType]="component"
+              [status]="widget.status"
+              [configForm]="widget.configForm[i]"
+              [deleteForm]="widget.deleteForm[i]">
+            </app-widget-header>
+          </nb-card>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+  <ng-template #elseblock>
+    <nb-card>
+      <app-widget-header
+        [title]="widget.title[0]"
+        [widgetType]="widget.component[0]"
+        [status]="widget.status"
+        [configForm]="widget.configForm[0]"
+        [deleteForm]="widget.deleteForm[0]">
+      </app-widget-header>
+    </nb-card>
+  </ng-template>
+</div>
+

@@ -1,9 +1,9 @@
-@import '../../../../styles/css/dashvariables.scss';
-@import '../../../../styles/css/mixins.scss';
+@import "../../../../styles/css/dashvariables.scss";
+@import "../../../../styles/css/mixins.scss";
 
 .plain-text-chart {
   color: $dash-widget-heading-text;
-  padding-bottom: .5em;
-  margin-bottom: 1em;
-  font-size: 1.4em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
 }

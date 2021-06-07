@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -10,7 +11,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"

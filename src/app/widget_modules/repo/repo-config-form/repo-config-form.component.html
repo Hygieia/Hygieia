@@ -16,11 +16,7 @@
         <label class="col-form-label col-sm-3" for="url">Repo URL <span class="required-text"> *</span></label>
         <div class="col-sm-9">
             <input id="url" type="text" class="form-control" placeholder="Enter repo URL" aria-label="url" formControlName="url"
-                   [class.is-invalid]="((configForm.url.dirty || configForm.url.touched) && configForm.url.errors)"
-                   [ngbTypeahead]="typeAheadResults"
-                   [inputFormatter]="getRepoTitle"
-                   [resultFormatter]="getRepoTitle"
-                   required>
+                   [class.is-invalid]="((configForm.url.dirty || configForm.url.touched) && configForm.url.errors)" required>
             <div class="invalid-feedback" *ngIf="configForm.url.value === ''">Please provide a repo url.</div>
         </div>
       </div>
@@ -71,7 +67,6 @@
           <button class="btn btn-primary" [disabled]="!repoConfigForm.valid">
             Save
           </button>
-          <div id="submitFailed" *ngIf="submitFailed">No repos found with matching url and branch.</div>
         </div>
       </div>
     </div>

@@ -1,15 +1,1 @@
-<div class="row dropdown-row">
-  <div class="col-md-8 dropdown-col" sticky>
-    <select (change)="loadCharts(allCollectorItems, $event.target.value)" #projectSelector>
-      <option *ngIf="!hasData">No projects available.</option>
-      <option *ngFor="let project of allCollectorItems; let i = index" [value]="i">{{project.description}}</option>
-    </select>
-  </div>
-  <div *ngIf="hasRefreshLink" class="col-md-4">
-    <mat-icon *ngIf="!loading" (click)="refreshProject()" id="refresh-icon">refresh</mat-icon>
-    <mat-progress-spinner [color]="primary" mode="indeterminate" diameter="25" *ngIf="loading"></mat-progress-spinner>
-  </div>
-</div>
-<div class="scan-container">
-  <ng-template appLayout></ng-template>
-</div>
+<ng-template appLayout></ng-template>

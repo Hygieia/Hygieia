@@ -143,3 +143,8 @@
 //  //     }
 //  // }
 //}
+::ng-deep .ngx-charts .gridline-path {
+  stroke: #89d8ec !important;
+  // stroke: var(--gray-default-rgba) !important;
+  // stroke: #455066 !important;
+}

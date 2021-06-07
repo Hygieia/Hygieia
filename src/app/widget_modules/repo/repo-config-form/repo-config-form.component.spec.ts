@@ -25,24 +25,6 @@ class MockCollectorService {
     }
   };
 
-  mockRepoArray = [
-    {
-      id : 'testId',
-      description : 'testd desc.',
-      enabled : true,
-      errors : [],
-      pushed : false,
-      collectorId : '12345',
-      lastUpdated : 12345,
-      options : {
-          branch : 'testBranch',
-          url : 'testUrl'
-      },
-      upsertTime : '2021-02-21T15:30:02.885Z',
-      _class : 'GitHubRepo'
-  }
-  ];
-
   mockCollectorType = [{name: 'test', collectorType: 'SCM'}];
 
   getItemsById(id: string): Observable<any> {
@@ -51,13 +33,6 @@ class MockCollectorService {
 
   collectorsByType(collectorType): Observable<any> {
     return of(this.mockCollectorType);
-  }
-
-  searchItemsBySearchField(type, search, field): Observable<any> {
-    if (search === 'badSearch') {
-      return of([]);
-    }
-    return of(this.mockRepoArray);
   }
 }
 
@@ -100,36 +75,13 @@ describe('RepoConfigFormComponent', () => {
         name: 'scmName',
         value: 'value',
       },
-      url: {
-        options: {
-          url: 'testUrl',
-          branch: 'testBranch'
-        }
-      },
+      url: 'testUrl',
       branch: 'testBranch',
       userID: 'testUser',
       password: 'testPass',
       personalAccessToken: 'testPersonalAccess',
     }
   };
-
-  const mockRepoArray = [
-    {
-      id : 'testId',
-      description : 'testd desc.',
-      enabled : true,
-      errors : [],
-      pushed : false,
-      collectorId : '12345',
-      lastUpdated : 12345,
-      options : {
-          branch : 'testBranch',
-          url : 'testUrl'
-      },
-      upsertTime : '2021-02-21T15:30:02.885Z',
-      _class : 'GitHubRepo'
-  }
-  ];
 
   const widgetConfigDataNoId = {
     options: {
@@ -186,30 +138,10 @@ describe('RepoConfigFormComponent', () => {
     expect(component.repoConfigForm.get('url').value).toEqual('');
     component.widgetConfig = widgetConfigData;
     component.submitForm();
-    expect(component.repoConfigForm.get('url').value.options.url).toEqual('testUrl');
+    expect(component.repoConfigForm.get('url').value).toEqual('testUrl');
 
     component.createForm();
     component.widgetConfig = widgetConfigDataNoId;
     component.submitForm();
-  });
-
-  it('should return if no options field on url value', () => {
-    component.createForm();
-    component.widgetConfig = widgetConfigDataNoId;
-    component.submitForm();
-    expect(component.submitFailed).toEqual(true);
-  });
-
-  it('should return if empty response from search', () => {
-    component.createForm();
-    const badConfig = widgetConfigData;
-    badConfig.options.url.options.url = 'badSearch';
-    component.widgetConfig = badConfig;
-    component.submitForm();
-    expect(component.submitFailed).toEqual(true);
-  });
-
-  it('should return if collectorItem is null', () => {
-    component.getRepoTitle(mockRepoArray[0]);
   });
 });

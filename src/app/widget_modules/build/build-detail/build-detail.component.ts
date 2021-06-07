@@ -1,33 +1,31 @@
-import { Component, Input, Type, ViewChild, OnInit } from '@angular/core';
-import { MatVerticalStepper } from '@angular/material';
-import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, Type, ViewChild, OnInit } from "@angular/core";
+import { MatVerticalStepper } from "@angular/material/stepper";
+import { Router } from "@angular/router";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-build-detail',
-  templateUrl: './build-detail.component.html',
-  styleUrls: ['./build-detail.component.scss']
+  selector: "app-build-detail",
+  templateUrl: "./build-detail.component.html",
+  styleUrls: ["./build-detail.component.scss"],
 })
 export class BuildDetailComponent implements OnInit {
-
   @Input() detailView: Type<any>;
   @ViewChild(MatVerticalStepper, { static: false }) stepper: MatVerticalStepper;
 
   public data;
   public readableDuration;
   public buildStatusArray = [`Success`, `Failed`, `Failure`, `Aborted`];
-  public stageStatusArray = [`SUCCESS`, `FAILED`, `FAILURE`, `ABORTED`, `NOT_EXECUTED`];
+  public stageStatusArray = [
+    `SUCCESS`,
+    `FAILED`,
+    `FAILURE`,
+    `ABORTED`,
+    `NOT_EXECUTED`,
+  ];
 
+  constructor(public activeModal: NgbActiveModal, public router: Router) {}
 
-
-  constructor(
-    public activeModal: NgbActiveModal,
-    public router: Router
-  ) { }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   @Input()
   set detailData(data: any) {
@@ -38,7 +36,7 @@ export class BuildDetailComponent implements OnInit {
     }
 
     // Truncate error messages
-    this.data[0].stages.map(stage => {
+    this.data[0].stages.map((stage) => {
       if (stage.error && stage.error.message) {
         stage.error.message = `${stage.error.message.substring(0, 150)} ...`;
       }
@@ -47,9 +45,8 @@ export class BuildDetailComponent implements OnInit {
     if (this.data[0].duration) {
       this.readableDuration = this.convertToReadable(this.data[0].duration);
     } else {
-      this.readableDuration = '-- : -- : --';
+      this.readableDuration = "-- : -- : --";
     }
-
   }
 
   // Converts build duration to HH:mm:ss format
@@ -60,13 +57,17 @@ export class BuildDetailComponent implements OnInit {
       hoursString = `0${hours.toString()}`;
     }
 
-    const minutes = Math.floor((timeInMiliseconds / 1000 / 60 / 60 - hours) * 60);
+    const minutes = Math.floor(
+      (timeInMiliseconds / 1000 / 60 / 60 - hours) * 60
+    );
     let minutesString = minutes.toString();
     if (minutes < 10) {
       minutesString = `0${minutes.toString()}`;
     }
 
-    const seconds = Math.floor(((timeInMiliseconds / 1000 / 60 / 60 - hours) * 60 - minutes) * 60);
+    const seconds = Math.floor(
+      ((timeInMiliseconds / 1000 / 60 / 60 - hours) * 60 - minutes) * 60
+    );
     let secondsString = seconds.toString();
     if (seconds < 10) {
       secondsString = `0${seconds.toString()}`;
@@ -76,7 +77,10 @@ export class BuildDetailComponent implements OnInit {
   }
 
   getTooltipInfo(stage) {
-    const tooltipObj = { Status: stage.status, 'Duration (ms)': stage.durationMillis };
+    const tooltipObj = {
+      Status: stage.status,
+      "Duration (ms)": stage.durationMillis,
+    };
     return JSON.stringify(tooltipObj);
   }
 
@@ -95,9 +99,4 @@ export class BuildDetailComponent implements OnInit {
     }
     return `default`;
   }
-
 }
-
-
-
-

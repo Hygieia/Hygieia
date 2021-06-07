@@ -1,0 +1,655 @@
+{
+    "_id": "5fd09b0d1d689159509dbbab",
+    "_class": "com.capitalone.dashboard.model.Pipeline",
+    "collectorItemId": "5fba52761d68914d1c826bec",
+    "stages": {
+        "DEV": {
+            "lastArtifact": {
+                "_id": "5ff2e0fac8fa5755d46dbaa9",
+                "timestamp": "1614072770538",
+                "canonicalName": "myBank-0.0.4-SNAPSHOT.war",
+                "artifactGroupId": "coin.sarvaTech",
+                "artifactModule": "myBank",
+                "artifactVersion": "0.0.4-SNAPSHOT",
+                "artifactName": "myBank",
+                "artifactExtension": "war",
+                "createdTimeStamp": "0",
+                "modifiedTimeStamp": "0",
+                "buildInfos": [
+                    {
+                        "_id": "5ff2e0f9c8fa5755d46dbaa7",
+                        "collectorItemId": "5fd091c01d689159509dbb78",
+                        "timestamp": "1614072825566",
+                        "number": "39",
+                        "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_nightly/39/",
+                        "startTime": "1614072770541",
+                        "endTime": "1614072819325",
+                        "duration": "48784",
+                        "buildStatus": "Success",
+                        "startedBy": "vivek",
+                        "codeRepos": [
+                            {
+                                "url": "https://github.com/vivekbuzruk/devopsjava",
+                                "branch": "main",
+                                "type": "GIT"
+                            }
+                        ],
+                        "sourceChangeSet": [
+                            {
+                                "scmRevisionNumber": "67ee95d070fba40fdcb22b4855e77f0f70d208ad",
+                                "scmCommitLog": "Updated for exception message",
+                                "scmAuthor": "vivek.buzruk",
+                                "scmCommitTimestamp": "1613836970000",
+                                "numberOfChanges": "1"
+                            }
+                        ],
+                        "stages": [],
+                        "deployMetadata": {}
+                    }
+                ],
+                "metadata": {
+                    "jobName": "myBankPipeline2_nightly",
+                    "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_nightly/39/",
+                    "jobUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_nightly/",
+                    "buildNumber": "39",
+                    "instanceUrl": "http://myToolsServer.sarvatech.co.in:11080/"
+                }
+            },
+            "commits": [
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "646a5ffd044734709521a1f5e87cd7a7bea89f74",
+                    "scmCommitLog": "Updated to allow String to Date conversion",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610600839000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "2b5a82f8605990193ceb4544dc6e2312799bde07",
+                    "scmCommitLog": "Further refactored util",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610555756000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "04ff9315ca3876b5777c43a8d497c65519c07e89",
+                    "scmCommitLog": "Modified Struture",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610761767000",
+                    "numberOfChanges": "16"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "7a44c5cf489cc7d1d8423bb7c14d88cf3e4fa606",
+                    "scmCommitLog": "Roadmap 28-Nov",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610881960000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "e6fd57e5197cf523f853023f47845adf949f6397",
+                    "scmCommitLog": "Moved package name",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779232000",
+                    "numberOfChanges": "17"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "f9f345b4d91bb4777d409a2d948fb0f8f36bc33f",
+                    "scmCommitLog": "Added Log to GetAccountAndBalance",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1611654494000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "4bf41cdbc1d38207bedaae9f979194d90ae628cb",
+                    "scmCommitLog": "use command line for sonar properties",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610794743000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "d82907f3f424cf557ae43446a6890cecb20e1843",
+                    "scmCommitLog": "get more clarity on date to long abd vice versa'",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610623668000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "79dd03574d5497a4d9c3d3502ac5e93c4c4b5f41",
+                    "scmCommitLog": "new Version",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779483000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "ef045a06e96670926b1641f8af43a45553ee85ba",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610889649000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "17b57381199dbcbc34ab513acfbd0fa4a7cfca8a",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610888709000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "1edb79253109a67551ee881ee45f05e1bd2233b1",
+                    "scmCommitLog": "Tested after refactoring",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610534416000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611826815757",
+                    "scmRevisionNumber": "9d30602783c912c828b33e49201c05e611c4eaf0",
+                    "scmCommitLog": "Util to onvert long to date",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610532316000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1613837365070",
+                    "scmRevisionNumber": "7bef474e883f1a9e8d49c3d7cf4722d0d72dbfb1",
+                    "scmCommitLog": "Update 1",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1612277786000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1613837365070",
+                    "scmRevisionNumber": "5346459d59601ee5fee31f951014815b789f3eb6",
+                    "scmCommitLog": "Update 2",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1612278409000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1613837365070",
+                    "scmRevisionNumber": "bbb24290992e147ab60e97fce68e1fb0406d6c6a",
+                    "scmCommitLog": "Update 3",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1612352180000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1613837365070",
+                    "scmRevisionNumber": "475c2f4b8e52c632226ebf8a2c4dcfa442ed1b79",
+                    "scmCommitLog": "Update 4",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1612369273000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1613837365070",
+                    "scmRevisionNumber": "d5875ba93c942dfd69022d8b702d19a4492434ee",
+                    "scmCommitLog": "Update 5",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1612432264000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1614072828665",
+                    "scmRevisionNumber": "67ee95d070fba40fdcb22b4855e77f0f70d208ad",
+                    "scmCommitLog": "Updated for exception message",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1613836970000",
+                    "numberOfChanges": "1"
+                }
+            ]
+        },
+        "QA": {
+            "lastArtifact": {
+                "_id": "5fd0b9f51d689159509dbc28",
+                "timestamp": "1611834509522",
+                "canonicalName": "myBank-0.0.4-SNAPSHOT.war",
+                "artifactGroupId": "coin.sarvaTech",
+                "artifactModule": "myBank",
+                "artifactVersion": "0.0.4-SNAPSHOT",
+                "artifactName": "myBank",
+                "artifactExtension": "war",
+                "createdTimeStamp": "0",
+                "modifiedTimeStamp": "0",
+                "buildInfos": [
+                    {
+                        "_id": "5fd0b9f31d689159509dbc26",
+                        "collectorItemId": "5fc2406c1d689159509dbae5",
+                        "timestamp": "1611834611704",
+                        "number": "9",
+                        "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_qa/9/",
+                        "startTime": "1611834509526",
+                        "endTime": "1611834561060",
+                        "duration": "51534",
+                        "buildStatus": "Success",
+                        "startedBy": "vivek",
+                        "codeRepos": [
+                            {
+                                "url": "https://github.com/vivekbuzruk/devopsjava",
+                                "branch": "myBank_qa",
+                                "type": "GIT"
+                            }
+                        ],
+                        "sourceChangeSet": [],
+                        "stages": [],
+                        "deployMetadata": {}
+                    }
+                ],
+                "metadata": {
+                    "jobName": "myBankPipeline2_qa",
+                    "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_qa/9/",
+                    "jobUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_qa/",
+                    "buildNumber": "9",
+                    "instanceUrl": "http://myToolsServer.sarvatech.co.in:11080/"
+                }
+            },
+            "commits": [
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "646a5ffd044734709521a1f5e87cd7a7bea89f74",
+                    "scmCommitLog": "Updated to allow String to Date conversion",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610600839000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "2b5a82f8605990193ceb4544dc6e2312799bde07",
+                    "scmCommitLog": "Further refactored util",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610555756000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "04ff9315ca3876b5777c43a8d497c65519c07e89",
+                    "scmCommitLog": "Modified Struture",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610761767000",
+                    "numberOfChanges": "16"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "7a44c5cf489cc7d1d8423bb7c14d88cf3e4fa606",
+                    "scmCommitLog": "Roadmap 28-Nov",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610881960000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "e6fd57e5197cf523f853023f47845adf949f6397",
+                    "scmCommitLog": "Moved package name",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779232000",
+                    "numberOfChanges": "17"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "f9f345b4d91bb4777d409a2d948fb0f8f36bc33f",
+                    "scmCommitLog": "Added Log to GetAccountAndBalance",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1611654494000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "4bf41cdbc1d38207bedaae9f979194d90ae628cb",
+                    "scmCommitLog": "use command line for sonar properties",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610794743000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "d82907f3f424cf557ae43446a6890cecb20e1843",
+                    "scmCommitLog": "get more clarity on date to long abd vice versa'",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610623668000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "79dd03574d5497a4d9c3d3502ac5e93c4c4b5f41",
+                    "scmCommitLog": "new Version",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779483000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "ef045a06e96670926b1641f8af43a45553ee85ba",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610889649000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "17b57381199dbcbc34ab513acfbd0fa4a7cfca8a",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610888709000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "1edb79253109a67551ee881ee45f05e1bd2233b1",
+                    "scmCommitLog": "Tested after refactoring",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610534416000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827024123",
+                    "scmRevisionNumber": "9d30602783c912c828b33e49201c05e611c4eaf0",
+                    "scmCommitLog": "Util to onvert long to date",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610532316000",
+                    "numberOfChanges": "1"
+                }
+            ]
+        },
+        "PROD": {
+            "lastArtifact": {
+                "_id": "5fd0ba381d689159509dbc37",
+                "timestamp": "1611834599686",
+                "canonicalName": "myBank-0.0.4-SNAPSHOT.war",
+                "artifactGroupId": "coin.sarvaTech",
+                "artifactModule": "myBank",
+                "artifactVersion": "0.0.4-SNAPSHOT",
+                "artifactName": "myBank",
+                "artifactExtension": "war",
+                "createdTimeStamp": "0",
+                "modifiedTimeStamp": "0",
+                "buildInfos": [
+                    {
+                        "_id": "5fd0ba361d689159509dbc35",
+                        "collectorItemId": "5fd09c7d1d689159509dbbd4",
+                        "timestamp": "1611834678820",
+                        "number": "5",
+                        "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_prod/5/",
+                        "startTime": "1611834599693",
+                        "endTime": "1611834628138",
+                        "duration": "28445",
+                        "buildStatus": "Success",
+                        "startedBy": "vivek",
+                        "codeRepos": [
+                            {
+                                "url": "https://github.com/vivekbuzruk/devopsjava",
+                                "branch": "myBank_prod",
+                                "type": "GIT"
+                            }
+                        ],
+                        "sourceChangeSet": [],
+                        "stages": [],
+                        "deployMetadata": {}
+                    }
+                ],
+                "metadata": {
+                    "jobName": "myBankPipeline2_prod",
+                    "buildUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_prod/5/",
+                    "jobUrl": "http://myToolsServer.sarvatech.co.in:11080/job/myBank%20Builds%20and%20Pipelines/job/myBankPipeline2_prod/",
+                    "buildNumber": "5",
+                    "instanceUrl": "http://myToolsServer.sarvatech.co.in:11080/"
+                }
+            },
+            "commits": [
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "646a5ffd044734709521a1f5e87cd7a7bea89f74",
+                    "scmCommitLog": "Updated to allow String to Date conversion",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610600839000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "2b5a82f8605990193ceb4544dc6e2312799bde07",
+                    "scmCommitLog": "Further refactored util",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610555756000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "04ff9315ca3876b5777c43a8d497c65519c07e89",
+                    "scmCommitLog": "Modified Struture",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610761767000",
+                    "numberOfChanges": "16"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "7a44c5cf489cc7d1d8423bb7c14d88cf3e4fa606",
+                    "scmCommitLog": "Roadmap 28-Nov",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610881960000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "e6fd57e5197cf523f853023f47845adf949f6397",
+                    "scmCommitLog": "Moved package name",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779232000",
+                    "numberOfChanges": "17"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "f9f345b4d91bb4777d409a2d948fb0f8f36bc33f",
+                    "scmCommitLog": "Added Log to GetAccountAndBalance",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1611654494000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "4bf41cdbc1d38207bedaae9f979194d90ae628cb",
+                    "scmCommitLog": "use command line for sonar properties",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610794743000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "d82907f3f424cf557ae43446a6890cecb20e1843",
+                    "scmCommitLog": "get more clarity on date to long abd vice versa'",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610623668000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "79dd03574d5497a4d9c3d3502ac5e93c4c4b5f41",
+                    "scmCommitLog": "new Version",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610779483000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "ef045a06e96670926b1641f8af43a45553ee85ba",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610889649000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "17b57381199dbcbc34ab513acfbd0fa4a7cfca8a",
+                    "scmCommitLog": "Set Sonar property standard as per Maven settings",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610888709000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "1edb79253109a67551ee881ee45f05e1bd2233b1",
+                    "scmCommitLog": "Tested after refactoring",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610534416000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1611827071747",
+                    "scmRevisionNumber": "9d30602783c912c828b33e49201c05e611c4eaf0",
+                    "scmCommitLog": "Util to onvert long to date",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1610532316000",
+                    "numberOfChanges": "1"
+                }
+            ]
+        },
+        "Build": {
+            "commits": [
+                {
+                    "timestamp": "1614077809288",
+                    "scmRevisionNumber": "b86da59ecf3d33962b35f02ecb34dfa9ea42b340",
+                    "scmCommitLog": "Named Banking System as myBank",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1614075713000",
+                    "numberOfChanges": "4"
+                },
+                {
+                    "timestamp": "1614249191887",
+                    "scmRevisionNumber": "51ffdf11964285648c65fc3881e752e8067d809e",
+                    "scmCommitLog": "New Version",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1614162015000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1614249191887",
+                    "scmRevisionNumber": "530a7753ecd65b58b03dfb071ec21c67cd7237f5",
+                    "scmCommitLog": "Messaging in HTML / JSP",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1614236244000",
+                    "numberOfChanges": "2"
+                },
+                {
+                    "timestamp": "1614249191887",
+                    "scmRevisionNumber": "accec6c65023ca8a6d04a31c0913f7553ad5f5bf",
+                    "scmCommitLog": "format html 1",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1614248630000",
+                    "numberOfChanges": "1"
+                },
+                {
+                    "timestamp": "1614617908943",
+                    "scmRevisionNumber": "8fab2989a6c81cf49be7a93b0b024dfd909cda64",
+                    "scmCommitLog": "Updated Format 2",
+                    "scmAuthor": "vivek.buzruk",
+                    "scmCommitTimestamp": "1614419848000",
+                    "numberOfChanges": "1"
+                }
+            ]
+        },
+        "Commit": {
+            "commits": [
+                {
+                    "timestamp": "1614248630000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "accec6c65023ca8a6d04a31c0913f7553ad5f5bf",
+                    "scmCommitLog": "format html 1",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "530a7753ecd65b58b03dfb071ec21c67cd7237f5"
+                    ],
+                    "scmCommitTimestamp": "1614248630000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                },
+                {
+                    "timestamp": "1614419848000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "8fab2989a6c81cf49be7a93b0b024dfd909cda64",
+                    "scmCommitLog": "Updated Format 2",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "accec6c65023ca8a6d04a31c0913f7553ad5f5bf"
+                    ],
+                    "scmCommitTimestamp": "1614419848000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                },
+                {
+                    "timestamp": "1614236244000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "530a7753ecd65b58b03dfb071ec21c67cd7237f5",
+                    "scmCommitLog": "Messaging in HTML / JSP",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "51ffdf11964285648c65fc3881e752e8067d809e"
+                    ],
+                    "scmCommitTimestamp": "1614236244000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                },
+                {
+                    "timestamp": "1614162015000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "51ffdf11964285648c65fc3881e752e8067d809e",
+                    "scmCommitLog": "New Version",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "dd749020864aeef72429235b2ed6e843a53552a8"
+                    ],
+                    "scmCommitTimestamp": "1614162015000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                },
+                {
+                    "timestamp": "1614094242000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "dd749020864aeef72429235b2ed6e843a53552a8",
+                    "scmCommitLog": "Named Banking System as myBank 2",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "b86da59ecf3d33962b35f02ecb34dfa9ea42b340"
+                    ],
+                    "scmCommitTimestamp": "1614094242000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                },
+                {
+                    "timestamp": "1614617561000",
+                    "scmUrl": "https://github.com/VivekBuzruk/DevOpsJava",
+                    "scmBranch": "main",
+                    "scmRevisionNumber": "4e4ac81575968232db4d9124063196e57669c765",
+                    "scmCommitLog": "formatting HTML 3",
+                    "scmAuthor": "Vivek Buzruk",
+                    "scmAuthorLogin": "",
+                    "scmParentRevisionNumbers": [
+                        "8fab2989a6c81cf49be7a93b0b024dfd909cda64"
+                    ],
+                    "scmCommitTimestamp": "1614617561000",
+                    "numberOfChanges": "1",
+                    "type": "New"
+                }
+            ]
+        }
+    },
+    "failedBuilds": []
+}

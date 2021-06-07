@@ -23,4 +23,5 @@ export class NumberCardChartComponent extends ChartComponent {
   formatInteger(val: number): string {
     return val.toFixed(0);
   }
+
 }
