@@ -1,4 +1,4 @@
-<div class="row dropdown-row">
+<div class="row dropdown-row" *ngIf="projDropDown">
   <div class="col-md-8 dropdown-col" sticky>
     <select (change)="loadCharts(allCollectorItems, $event.target.value)" #projectSelector>
       <option *ngIf="!hasData">No projects available.</option>
@@ -10,6 +10,6 @@
     <mat-progress-spinner [color]="primary" mode="indeterminate" diameter="25" *ngIf="loading"></mat-progress-spinner>
   </div>
 </div>
-<div class="scan-container">
+<div [class.scan-container]="projDropDown">
   <ng-template appLayout></ng-template>
 </div>

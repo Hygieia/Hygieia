@@ -9,10 +9,68 @@ import { BuildDetailComponent } from '../build-detail/build-detail.component';
 
 export let BUILD_CHARTS: IChart[] = [
   {
+    title: "Builds Per Day",
+    component: LineChartComponent,
+    data: {
+      areaChart: true, // Default true
+      detailComponent: BuildDetailComponent,
+      dataPoints: [
+        {
+          name: "All Builds",
+          series: [],
+        },
+        {
+          name: "Failed Builds",
+          series: [],
+        },
+      ],
+    } as ILineChartData,
+    xAxisLabel: "Days",
+    yAxisLabel: "Builds",
+    colorScheme: {
+      domain: ["green", "red"],
+    },
+  },
+  {
+    title: "Latest Builds",
+    component: ClickListComponent,
+    data: [],
+    xAxisLabel: "",
+    yAxisLabel: "",
+    colorScheme: {},
+  },
+  {
+    title: "Average Build Duration",
+    component: ComboChartComponent,
+    data: [
+      [],
+      [
+        {
+          name: "Threshold Line",
+          series: [],
+        },
+      ],
+    ],
+    xAxisLabel: "Days",
+    yAxisLabel: "Build Duration",
+    colorScheme: {},
+  },
+  {
+    title: "Total Builds",
+    component: ClickListComponent,
+    data: [],
+    xAxisLabel: "",
+    yAxisLabel: "",
+    colorScheme: {},
+  },
+];
+
+export let OLD_BUILD_CHARTS: IChart[] = [
+  {
     title: 'Builds Per Day',
     component: LineChartComponent,
     data: {
-      areaChart: true,
+      areaChart: false,
       detailComponent: BuildDetailComponent,
       dataPoints: [
       {

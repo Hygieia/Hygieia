@@ -6,6 +6,8 @@
 
 .list-item-subtitle {
   @include text-standard-date;
+  padding-left: 0.5em; /* padding: top | right | bottom | left */
+  font-size: 1em;
 }
 
 .clickable {
@@ -47,7 +49,7 @@ tr.dash-row>td {
 }
 
 .dash-row {
-  $dash-row-height: 3.25em;
+  $dash-row-height: 2.5em;
 
   @include clearfix;
   line-height: $dash-row-height;
@@ -76,9 +78,10 @@ tr.dash-row>td {
 
 list-item-title {
   display: inline-block;
-  margin-right: 1em;
+  margin-right: 0.5em;
   min-width: 3em;
   @include text-lg;
+  font-size: 1.1em;
 }
 
 .build-summary-type {

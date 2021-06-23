@@ -3,7 +3,7 @@
 
 // DASH-STATUS
 .dash-status {
-  min-width: 3em;
+  min-width: 2em;
   text-align: center;
 
   .dash-status-pass {
@@ -19,7 +19,7 @@
   .dash-status-fail {
     display: inline-block;
     font-weight: bold;
-    width: 2em;
+    width: 1.5em;
     height: 2em;
     background: $dash-status-fail;
     border: .2em solid $dash-status-fail-border;
@@ -34,7 +34,7 @@
   .dash-status-ignore {
     display: inline-block;
     font-weight: bold;
-    width: 2em;
+    width: 1.5em;
     height: 2em;
     background: $dash-status-ignore;
     border: .2em solid $dash-status-ignore-border;
@@ -46,7 +46,7 @@
   .dash-status-critical {
     display: inline-block;
     font-weight: bold;
-    width: 2em;
+    width: 1.5em;
     height: 2em;
     background: black;
     border: .2em solid $dash-status-fail-border;
@@ -62,8 +62,8 @@
   }
 
   .dash-status-fail {
-    width: 2.75em;
-    height: 2.75em;
+    width: 2em;
+    height: 2.5em;
     line-height: 2.4em;
   }
 }

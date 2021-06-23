@@ -5,8 +5,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {Router, RouterModule} from '@angular/router';
 
-import { SharedModule } from '../../../shared/shared.module';
-import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
+import { SharedModule } from '../../shared/shared.module';
+import { CaponeTemplateComponent } from '../team-dashboard/capone-template/capone-template.component';
 import { DashboardViewComponent } from './dashboard-view.component';
 import { DasboardNavbarComponent } from 'src/app/core/dasboard-navbar/dasboard-navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

@@ -11,7 +11,7 @@ import { ICollItem } from 'src/app/viewer_modules/collector-item/interfaces';
 export class StaticAnalysisService {
 
   collectorItemsEndpoint = '/api/collector/item/component';
-  staticAnalysisRoute = '/api/ui-widget/code-quality';
+  staticAnalysisRoute = '/api/quality/static-analysis'; // '/api/ui-widget/code-quality';  //
 
   constructor(private http: HttpClient) { }
 

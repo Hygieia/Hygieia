@@ -1,0 +1,48 @@
+@import "../../../../styles/css/dashvariables.scss";
+@import "../../../../styles/css/mixins.scss";
+
+.plain-text-chart {
+  color: $dash-widget-heading-text;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  font-size: 1.1em;
+}
+
+.chartParent {
+  padding: 5px;
+  width: 400px;
+}
+
+.divTable {
+  display: table;
+  width: 100%;
+}
+
+.divTableRow {
+  display: table-row;
+}
+
+.divTableCell {
+  display: table-cell;
+}
+
+.header-text {
+  font-weight: bold;
+  color: dimgrey;
+}
+
+.divTableBody {
+  display: table-row-group;
+}
+
+#commits {
+  color: #04eeff;
+}
+
+#pull {
+  color: #04eb0f;
+}
+
+#issues {
+  color: red;
+}

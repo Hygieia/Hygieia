@@ -4,11 +4,15 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { 
+  NgxChartsModule,
+  ChartCommonModule 
+} from '@swimlane/ngx-charts';
 import { NgxUIModule } from '@swimlane/ngx-ui';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { CaponeTemplateComponent } from '../screen_modules/team-dashboard/capone-template/capone-template.component';
+import { StechProdTemplateComponent } from '../screen_modules/product-dashboard/stech-template/stech-prod-template.component';
 import { ChartDirective } from './charts/chart.directive';
 import { ChartComponent } from './charts/chart/chart.component';
 import { ClickListComponent } from './charts/click-list/click-list.component';
@@ -24,6 +28,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutDirective } from './layouts/layout.directive';
 import { LayoutComponent } from './layouts/layout/layout.component';
 import { TwoByTwoLayoutComponent } from './layouts/two-by-two-layout/two-by-two-layout.component';
+import { EngineWagonLayoutChartComponent } from './layouts/engine-wagon-layout-chart/engine-wagon-layout-chart.component';
 import { ConfirmationModalComponent } from './modals/confirmation-modal/confirmation-modal.component';
 import { DetailModalComponent } from './modals/detail-modal/detail-modal.component';
 import { DetailModalDirective } from './modals/detail-modal/detail-modal.directive';
@@ -41,6 +46,7 @@ import { OneChartLayoutComponent } from './layouts/one-chart-layout/one-chart-la
 import { OneByTwoLayoutComponent } from './layouts/one-by-two-layout/one-by-two-layout.component';
 import { HorizontalBarChartComponent } from './charts/horizontal-bar-chart/horizontal-bar-chart.component';
 import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal.component';
+import { PieChartComponent } from "./charts/pie-chart/pie-chart.component";
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
 import { AuditModalComponent } from './modals/audit-modal/audit-modal.component';
@@ -56,6 +62,7 @@ import {RotationChartComponent} from './charts/rotation/rotation-chart.component
 import {
     NbActionsModule,
     NbCardModule,
+    NbLayoutModule,
     NbIconModule,
     NbSearchModule,
     NbTabsetModule,
@@ -105,13 +112,15 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
     OneByTwoLayoutComponent,
     OneByTwoLayoutTableChartComponent,
     PaginationComponent,
+    PieChartComponent,
     PieGridComponent,
     PieGridChartComponent,
     PlaceholderWidgetComponent,
     RotationChartComponent,
+    StechProdTemplateComponent,
     TemplatesDirective,
-    TimeAgoPipe,
     TwoByTwoLayoutComponent,
+    EngineWagonLayoutChartComponent,
     WidgetComponent,
     WidgetDirective,
     WidgetHeaderComponent,
@@ -121,7 +130,6 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
     OneChartLayoutComponent,
     GaugeChartComponent,
     AuditModalComponent,
-    TwoByOneLayoutComponent,
     NavbarComponent,
     ConfirmationModalDirective,
     DashTrashComponent,
@@ -130,7 +138,8 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
     GeneralFilterPipe,
     GeneralOrderByPipe,
     XByOneLayoutComponent,
-    RefreshModalComponent
+    RefreshModalComponent,
+    TimeAgoPipe
   ],
   entryComponents: [
     GeneralDeleteComponent,
@@ -151,21 +160,24 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
     OneByTwoLayoutComponent,
     OneByTwoLayoutTableChartComponent,
     OneChartLayoutComponent,
+    PieChartComponent,
     PieGridComponent,
     PieGridChartComponent,
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
+    StechProdTemplateComponent,
     TwoByOneLayoutComponent,
     XByOneLayoutComponent,
     RotationChartComponent,
     TwoByTwoLayoutComponent,
-    TwoByTwoLayoutComponent,
+    EngineWagonLayoutChartComponent,
     AuditModalComponent,
     DashTrashComponent,
     DashEditComponent,
     EditDashboardModalComponent
   ],
   imports: [
+        ChartCommonModule,
         CommonModule,
         DragDropModule,
         FlexLayoutModule,
@@ -174,11 +186,13 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
         NgxUIModule,
         ReactiveFormsModule,
         TabsModule,
+
         RouterModule,
         NbActionsModule,
         NbUserModule,
         NbSearchModule,
         NbCardModule,
+        NbLayoutModule,
         NbTabsetModule,
         NbIconModule,
         TabsFixturesModule,
@@ -201,12 +215,15 @@ import { RefreshModalComponent } from './modals/refresh-modal/refresh-modal.comp
     OneByTwoLayoutComponent,
     OneByTwoLayoutTableChartComponent,
     PaginationComponent,
+    PieChartComponent,
     PieGridComponent,
     PieGridChartComponent,
     ReactiveFormsModule,
     RotationChartComponent,
+    StechProdTemplateComponent,
     TemplatesDirective,
     TwoByTwoLayoutComponent,
+    EngineWagonLayoutChartComponent,
     TwoByOneLayoutComponent,
     WidgetComponent,
     WidgetDirective,

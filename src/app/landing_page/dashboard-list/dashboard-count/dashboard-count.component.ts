@@ -35,7 +35,7 @@ export class DashboardCountComponent implements OnInit {
     const counts = new Set();
     this.dashboardService.dashboardCountConfig$.pipe(take(2)).subscribe(count => {
       counts.add(count);
-      this.dCount = [...counts];
+      this.dCount = [...counts] as IPieData[];
     });
   }
 }

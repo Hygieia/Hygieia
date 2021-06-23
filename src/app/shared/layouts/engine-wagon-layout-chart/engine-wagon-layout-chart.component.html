@@ -1,0 +1,35 @@
+<div class="container">
+  <!-- <div class="row mb-3">
+    <div class="col-md-8" >
+      <div class="chartParent"  #chartParent>
+        <ng-template appChart></ng-template>
+      </div>
+    </div>
+  </div> -->
+  <div class="widget">
+    <div class="divTable">
+      <div class="divTableBody" *ngIf="myChartDisplay">
+        <div class="divTableRow">
+          <div class="divTableCell"></div>
+          <div class="divTableCell header-text">Std Deviation</div>
+          <div class="divTableCell header-text">Std Avg. Time</div>
+          <div class="divTableCell header-text">Last updated</div>
+        </div>
+        <div class="divTableRow"
+             *ngFor="let chartDisplay of myChartDisplay" >
+            <div class="divTableCell plain-text-chart dash-overflow" *ngFor="let cell of chartDisplay; let i=index">
+                <span id="stageName_{{i}}" *ngIf="i == 0">{{cell}}</span>
+                  <!-- <div id="commits" class="divTableCell">Commits</div> -->
+                <span *ngIf="i !== 0">{{cell}}</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *ngFor="let chart of charts" > -->
+<!-- <div id="stageName_{{ix}}" class="divTableCell"><ng-template appChart></ng-template></div> -->
+  <!-- <div id="commits" class="divTableCell">Commits</div> -->
+<!-- <div class="divTableCell"><ng-template appChart></ng-template></div>
+<div class="divTableCell"><ng-template appChart></ng-template></div>
+<div class="divTableCell"><ng-template appChart></ng-template></div> -->

@@ -1,0 +1,38 @@
+<div class="widget dark-chart-theme">
+    <div class="chart-heading">
+      {{title}}
+    </div>
+    <ng-container *ngIf="(data.advancedChart !== undefined && data.advancedChart) else elseBlock">
+        <ngx-charts-advanced-pie-chart 
+            [view]="view" 
+            [scheme]="colorScheme" 
+            [results]="data?.results" 
+            [gradient]="gradient" 
+            [label]="data?.label"
+            [valueFormatting]="myValueFormat"
+            [nameFormatting]="myNameFormat"
+            [percentageFormatting]="myPercentFormat"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)" 
+            (deactivate)="onDeactivate($event)">
+        </ngx-charts-advanced-pie-chart>
+    </ng-container>
+    <ng-template #elseBlock>
+        <ngx-charts-pie-chart 
+            [view]="view" 
+            [scheme]="colorScheme" 
+            [results]="data?.results" 
+            [gradient]="gradient" 
+            [legend]="showLegend"
+            [legendPosition]="legendPosition" 
+            [legendTitle]="data?.label"
+            [labels]="showLabels" 
+            [doughnut]="isDoughnut" 
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)" 
+            (deactivate)="onDeactivate($event)">
+        </ngx-charts-pie-chart>
+    </ng-template>
+
+
+</div>

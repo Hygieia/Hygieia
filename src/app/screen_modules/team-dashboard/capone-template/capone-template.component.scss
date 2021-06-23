@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  grid-column-gap: 3em;
+  grid-column-gap: 2em;
 
   @include media-breakpoint-down(lg) {
     grid-template-columns: 1fr;
@@ -23,7 +23,7 @@ nb-card {
 }
 
 nb-card:last-of-type {
-  margin-bottom: 3em;
+  margin-bottom: 2em;
 }
 
 div .search-i {

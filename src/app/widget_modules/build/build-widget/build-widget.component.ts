@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import {of, Subscription} from 'rxjs';
 import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
-import {IClickListData, IClickListItemBuild} from 'src/app/shared/charts/click-list/click-list-interfaces';
+import {IClickListData, IClickListItemBuild, IClickListItem,} from 'src/app/shared/charts/click-list/click-list-interfaces';
 import {DashStatus} from 'src/app/shared/dash-status/DashStatus';
 import {DashboardService} from 'src/app/shared/dashboard.service';
 import {LayoutDirective} from 'src/app/shared/layouts/layout.directive';
@@ -18,7 +18,7 @@ import {WidgetComponent} from 'src/app/shared/widget/widget.component';
 import {BuildDetailComponent} from '../build-detail/build-detail.component';
 import {BuildService} from '../build.service';
 import {IBuild} from '../interfaces';
-import {BUILD_CHARTS} from './build-charts';
+import {BUILD_CHARTS, OLD_BUILD_CHARTS} from './build-charts';
 // @ts-ignore
 import moment from 'moment';
 import { groupBy } from 'lodash';
@@ -36,6 +36,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   private readonly TOTAL_BUILD_COUNTS_TIME_RANGES = [7, 14];
 
   private buildTimeThreshold: number;
+  private readonly useOldTotalBuildCharts = false;
 
   // Default build time threshold
   private readonly BUILD_TIME_THRESHOLD = 900000;
@@ -57,7 +58,11 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     this.widgetId = 'build0';
     this.layout = TwoByTwoLayoutComponent;
     // Chart configuration moved to external file
-    this.charts = BUILD_CHARTS;
+    if (this.useOldTotalBuildCharts) {
+      this.charts = OLD_BUILD_CHARTS;
+    } else {
+      this.charts = BUILD_CHARTS;
+    }
     this.auditType = '';
     this.init();
   }
@@ -105,9 +110,13 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
 
   loadCharts(result: IBuild[]) {
     this.generateBuildsPerDay(result);
-    this.generateTotalBuildCounts(result);
     this.generateAverageBuildDuration(result);
     this.generateLatestBuilds(result);
+    if (this.useOldTotalBuildCharts) {
+      this.generateTotalBuildCounts(result);
+    } else {
+      this.newGenerateTotalBuildCounts(result);
+    }
     super.loadComponent(this.childLayoutTag);
   }
 
@@ -198,6 +207,47 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   }
 
   // *********************** TOTAL BUILD COUNTS ************************
+
+  private newGenerateTotalBuildCounts(result: IBuild[]) {
+    const today = this.toMidnight(new Date());
+    const bucketOneStartDate = this.toMidnight(new Date());
+    const bucketTwoStartDate = this.toMidnight(new Date());
+    bucketOneStartDate.setDate(bucketOneStartDate.getDate() - this.TOTAL_BUILD_COUNTS_TIME_RANGES[0] + 1);
+    bucketTwoStartDate.setDate(bucketTwoStartDate.getDate() - this.TOTAL_BUILD_COUNTS_TIME_RANGES[1] + 1);
+
+    const todayCount = result.filter((build) => this.checkBuildAfterDate(build, today)).length;
+    const bucketOneCount = result.filter((build) => this.checkBuildAfterDate(build, bucketOneStartDate)).length;
+    const bucketTwoCount = result.filter((build) => this.checkBuildAfterDate(build, bucketTwoStartDate)).length;
+
+    const myItems: IClickListItem[] = [
+      {
+        status: null,
+        statusText: null,
+        title: String(todayCount),
+        subtitles: ["Today"],
+        url: null,
+      },
+      {
+        status: null,
+        statusText: null,
+        title: String(bucketOneCount),
+        subtitles: ["Last 7 Days"],
+        url: null,
+      },
+      {
+        status: null,
+        statusText: null,
+        title: String(bucketTwoCount),
+        subtitles: ["Last 14 Days"],
+        url: null,
+      },
+    ];
+    this.charts[3].data = {
+      items: myItems,
+      clickableContent: null,
+      clickableHeader: null,
+    } as IClickListData;
+  }
 
   private generateTotalBuildCounts(result: IBuild[]) {
     const today = this.toMidnight(new Date());
@@ -310,9 +360,11 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
       this.charts[2].data[0] = [{name: new Date(), value: 0}];
       this.charts[2].colorScheme.domain = ['red'];
       this.charts[2].data[1][0].series = [{name: 'No Data Found', value: 0}];
-      this.charts[3].data[0].value = 0;
-      this.charts[3].data[1].value = 0;
-      this.charts[3].data[2].value = 0;
+      if (this.charts[3].data[0] !== undefined) {
+        this.charts[3].data[0].value = 0;
+        this.charts[3].data[1].value = 0;
+        this.charts[3].data[2].value = 0;
+      }
     }
     super.loadComponent(this.childLayoutTag);
   }

@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataTypeMap } from "@swimlane/ngx-ui";
 import { DashStatus } from '../../dash-status/DashStatus';
 import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.component';
 import { ChartComponent } from '../chart/chart.component';
@@ -16,6 +17,13 @@ export class ClickListComponent extends ChartComponent {
 
   constructor(private modalService: NgbModal) {
     super();
+  }
+
+  getStyle(iterIndex: number): any {
+    if (this.data && this.data.colorScheme && iterIndex < this.data.colorScheme.length) {
+      return { color: this.data.colorScheme[iterIndex] };
+    }
+    return {};
   }
 
   openDetailView(item: IClickListItem) {

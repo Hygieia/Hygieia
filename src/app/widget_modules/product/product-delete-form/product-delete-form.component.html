@@ -1,0 +1,15 @@
+<form [formGroup]="productDeleteForm" (ngSubmit)="submitDeleteForm()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <div class="col-form-label">{{message}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="col text-center">
+      <button class="btn btn-outline-secondary mr-3" (click)="activeModal.dismiss()">Cancel</button>
+      <button class="btn btn-danger" [disabled]="!productDeleteForm.valid || !widgetConfigId">Delete</button>
+    </div>
+  </div>
+</form>

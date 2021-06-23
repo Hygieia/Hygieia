@@ -14,6 +14,7 @@ export interface IClickListData {
   items: IClickListItem[];
   clickableContent: Type<any>;
   clickableHeader: Type<any>;
+  colorScheme?: {};
 }
 
 export interface IClickListItem {
@@ -22,6 +23,7 @@ export interface IClickListItem {
   title: string;
   subtitles: any[];
   url: string;
+  textColor?: string;
 }
 
 export interface IClickListItemMetric extends IClickListItem {

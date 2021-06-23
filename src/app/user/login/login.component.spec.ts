@@ -62,7 +62,7 @@ describe('LoginComponent', () => {
   });
   it('should login with STANDARD user', () => {
     component.activeTab = 'STANDARD';
-    const spy = spyOn(authService, 'login').and.returnValue({ subscribe: () => true });
+    const spy = spyOn(authService, 'login').and.returnValue(of(true)); //{ subscribe: () => true });
     const obj = { value : {
         username : 'test',
         password: 'test'
@@ -72,7 +72,7 @@ describe('LoginComponent', () => {
   });
   it('should login with LDAP user', () => {
     component.activeTab = 'LDAP';
-    const spy = spyOn(authService, 'loginLdap').and.returnValue({ subscribe: () => true });
+    const spy = spyOn(authService, 'loginLdap').and.returnValue(of(true)); // { subscribe: () => true });
     const obj = { value : {
         username : 'test',
         password: 'test'
@@ -83,7 +83,7 @@ describe('LoginComponent', () => {
 
   it('should login with SSO user', () => {
     component.activeTab = 'SSO';
-    const spy = spyOn(component, 'routeToSso').and.returnValue({ subscribe: () => true });
+    const spy = spyOn(component, 'routeToSso').and.returnValue(Promise.resolve(true));
     component.routeToSso();
     expect(spy).toHaveBeenCalledWith();
   });

@@ -31,8 +31,8 @@ import {CreateOrUpdateApiPropertiesComponent} from './dashboard/admin-dashboard/
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateApiAuditPropertiesComponent} from './dashboard/admin-dashboard/modal/create-or-update-api-audit-properties/create-or-update-api-audit-properties.component';
 import { CollectorsComponent } from './dashboard/admin-dashboard/collectors/collectors.component';
-import { MatIconModule, MatTableModule } from '@angular/material';
-
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 @NgModule({
   declarations: [
     AdminDashboardComponent,

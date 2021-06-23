@@ -8,22 +8,23 @@ import {
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
-} from '@angular/core';
+} from "@angular/core";
 import {
   BaseChartComponent,
   calculateViewDimensions,
   ColorHelper,
+  LegendPosition,
+  ScaleType,
   LineSeriesComponent,
   ViewDimensions,
-} from '@swimlane/ngx-charts';
-import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { curveLinear } from 'd3-shape';
-
+} from "@swimlane/ngx-charts";
+import { scaleBand, scaleLinear, scalePoint, scaleTime } from "d3-scale";
+import { curveLinear } from "d3-shape";
 
 // This component is based on the combo chart example from ngx-charts.
 // https://github.com/swimlane/ngx-charts/blob/master/demo/combo-chart/combo-chart.component.ts
 @Component({
-  selector: 'app-line-and-bar-chart',
+  selector: "app-line-and-bar-chart",
   template: `
     <ngx-charts-chart
       [view]="[width + legendSpacing, height]"
@@ -34,9 +35,8 @@ import { curveLinear } from 'd3-shape';
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
-
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-          <svg:g ngx-charts-x-axis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -121,8 +121,8 @@ import { curveLinear } from 'd3-shape';
       </svg:g>
     </ngx-charts-chart>
   `,
-  styleUrls: ['./line-and-bar-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ["./line-and-bar-chart.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LineAndBarChartComponent extends BaseChartComponent {
 
@@ -130,21 +130,21 @@ export class LineAndBarChartComponent extends BaseChartComponent {
 
   @Input() curve: any = curveLinear;
   @Input() legend = false;
-  @Input() legendTitle = 'Legend';
-  @Input() legendPosition = 'right';
+  @Input() legendTitle = "Legend";
+  @Input() legendPosition: LegendPosition = LegendPosition.Right;
   @Input() xAxis = true;
   @Input() yAxis = true;
   @Input() showXAxisLabel = true;
   @Input() showYAxisLabel = true;
   @Input() showRightYAxisLabel = false;
-  @Input() xAxisLabel = '';
-  @Input() yAxisLabel = '';
+  @Input() xAxisLabel = "";
+  @Input() yAxisLabel = "";
   @Input() yAxisLabelRight = false;
   @Input() tooltipDisabled = false;
   @Input() gradient = false;
   @Input() showGridLines = true;
   @Input() activeEntries: any[] = [];
-  @Input() schemeType = 'ordinal';
+  @Input() schemeType: ScaleType = ScaleType.Ordinal;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
@@ -160,8 +160,8 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate', {static: true}) tooltipTemplate: TemplateRef<any>;
-  @ContentChild('seriesTooltipTemplate', {static: true}) seriesTooltipTemplate: TemplateRef<any>;
+  @ContentChild("tooltipTemplate", { static: true }) tooltipTemplate: TemplateRef<any>;
+  @ContentChild("seriesTooltipTemplate", { static: true }) seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xScale: any;
@@ -175,7 +175,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   xAxisHeight = 0;
   yAxisWidth = 0;
   legendOptions: any;
-  scaleType = 'linear';
+  scaleType = "linear";
   xScaleLine;
   yScaleLine;
   xDomainLine;
@@ -186,8 +186,8 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   xSet;
   filteredDomain;
   hoveredVertical;
-  yOrientLeft = 'left';
-  yOrientRight = 'right';
+  yOrientLeft = "left";
+  yOrientRight = "right";
   legendSpacing = 0;
   bandwidth;
   barPadding = 8;
@@ -247,7 +247,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
     this.activeEntries = [];
   }
 
-  @HostListener('mouseleave')
+  @HostListener("mouseleave")
   hideCircles(): void {
     this.hoveredVertical = null;
     this.deactivateAll();
@@ -270,7 +270,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
       name: this.yAxisLabel,
       series: this.results
     });
-    return this.combinedSeries.map(d => d.name);
+    return this.combinedSeries.map((d) => d.name);
   }
 
   isDate(value): boolean {
@@ -290,14 +290,18 @@ export class LineAndBarChartComponent extends BaseChartComponent {
         date = false;
       }
 
-      if (typeof value !== 'number') {
+      if (typeof value !== "number") {
         num = false;
       }
     }
 
-    if (date) { return 'time'; }
-    if (num) { return 'linear'; }
-    return 'ordinal';
+    if (date) {
+      return ScaleType.Time;
+    }
+    if (num) {
+      return ScaleType.Linear;
+    }
+    return ScaleType.Ordinal;
   }
 
   getXDomainLine(): any[] {
@@ -314,12 +318,12 @@ export class LineAndBarChartComponent extends BaseChartComponent {
     this.scaleType = this.getScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'time') {
+    if (this.scaleType === ScaleType.Time) {
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-    } else if (this.scaleType === 'linear') {
-      values = values.map(v => Number(v));
+    } else if (this.scaleType === ScaleType.Linear) {
+      values = values.map((v) => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
@@ -369,19 +373,15 @@ export class LineAndBarChartComponent extends BaseChartComponent {
       this.bandwidth = (this.dims.width - this.barPadding);
     }
 
-    if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
-    } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
+    if (this.scaleType === ScaleType.Time) {
+      scale = scaleTime().range([0, width]).domain(domain);
+    } else if (this.scaleType === ScaleType.Linear) {
+      scale = scaleLinear().range([0, width]).domain(domain);
 
       if (this.roundDomains) {
         scale = scale.nice();
       }
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.scaleType === ScaleType.Ordinal) {
       scale = scalePoint()
         .range([this.bandwidth / 2, width - this.bandwidth / 2])
         .domain(domain);
@@ -391,9 +391,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   }
 
   getYScaleLine(domain, height): any {
-    const scale = scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    const scale = scaleLinear().range([height, 0]).domain(domain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
@@ -420,11 +418,11 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   }
 
   getXDomain(): any[] {
-    return this.results.map(d => d.name);
+    return this.results.map((d) => d.name);
   }
 
   getYDomain() {
-    const values = this.results.map(d => d.value);
+    const values = this.results.map((d) => d.value);
     const min = Math.min(0, ...values);
     const max = Math.max(...values);
     if (this.yLeftAxisScaleFactor) {
@@ -441,7 +439,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
 
   setColors(): void {
     let domain;
-    if (this.schemeType === 'ordinal') {
+    if (this.schemeType === ScaleType.Ordinal) {
       domain = this.xDomain;
     } else {
       domain = this.yDomain;
@@ -458,7 +456,7 @@ export class LineAndBarChartComponent extends BaseChartComponent {
       title: undefined,
       position: this.legendPosition
     };
-    if (opts.scaleType === 'ordinal') {
+    if (opts.scaleType === ScaleType.Ordinal) {
       opts.domain = this.seriesDomain;
       opts.colors = this.colorsLine;
       opts.title = this.legendTitle;
@@ -484,8 +482,8 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   }
 
   onActivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (d.name === item.name && d.value === item.value && d.series === item.series);
     });
     if (idx > -1) {
       return;
@@ -496,8 +494,8 @@ export class LineAndBarChartComponent extends BaseChartComponent {
   }
 
   onDeactivate(item) {
-    const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value && d.series === item.series;
+    const idx = this.activeEntries.findIndex((d) => {
+      return (d.name === item.name && d.value === item.value && d.series === item.series);
     });
 
     this.activeEntries.splice(idx, 1);

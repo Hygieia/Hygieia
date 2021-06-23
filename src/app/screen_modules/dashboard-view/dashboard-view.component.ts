@@ -10,9 +10,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { DashboardComponent } from 'src/app/shared/dashboard/dashboard.component';
 import { TemplatesDirective } from 'src/app/shared/templates/templates.directive';
-import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
+import { CaponeTemplateComponent } from '../team-dashboard/capone-template/capone-template.component';
+import { StechProdTemplateComponent } from "../product-dashboard/stech-template/stech-prod-template.component";
+
 import { widgetsAll } from './dashboard-view';
-import {IWidget} from '../../../shared/interfaces';
+import {IWidget} from '../../shared/interfaces';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -39,7 +41,7 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
     this.dashboardService.clearDashboard();
     this.dashboardId = this.route.snapshot.paramMap.get('id');
     this.loadDashboard(this.dashboardId);
-    this.baseTemplate = CaponeTemplateComponent;
+    // this.baseTemplate = CaponeTemplateComponent;
   }
 
   private loadDashboard(dashboardId: string) {
@@ -60,6 +62,11 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
       this.dashboardTitle = [dashboard.title, dashboard.configurationItemBusAppName, dashboard.configurationItemBusServName]
         .filter(Boolean).join(' - ');
 
+      if (dashboard.type === "Product") {
+         this.baseTemplate = StechProdTemplateComponent;
+      } else if (dashboard.type === "Team") {
+         this.baseTemplate = CaponeTemplateComponent; // StechTeamTemplateComponent;
+      }  
       const activeWidgets = new Set<string>();
       dashboard.widgets.forEach(widget => activeWidgets.add(widget.name));
       if (dashboard.activeWidgets && dashboard.activeWidgets.length) {

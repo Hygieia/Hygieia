@@ -110,7 +110,7 @@ describe('DeployWidgetComponent', () => {
           {
             name : 'api.jar',
             version : '2.0.5',
-            jobURL: 'mydeployurl.com/something/something',
+            jobUrl: 'mydeployurl.com/something/something',
             deployed : true,
             lastUpdated : 1529001705028,
             servers : [

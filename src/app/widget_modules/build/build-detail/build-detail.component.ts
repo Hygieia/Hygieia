@@ -1,5 +1,6 @@
 import { Component, Input, Type, ViewChild, OnInit } from '@angular/core';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper } from '@angular/material/stepper';
+
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 

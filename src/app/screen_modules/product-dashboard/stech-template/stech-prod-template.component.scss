@@ -1,0 +1,33 @@
+@import "../../../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+:host {
+  display: block;
+  max-height: 25rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.card-row {
+  display: flex;
+  margin: 0 -0.5rem;
+}
+
+.card-col {
+  flex: 1 0 calc(50% - 1rem);
+  margin: 0 0.5rem;
+}
+
+.colored-column-warning {
+  background-color: aqua;
+}
+
+nb-card {
+  background-color: transparent;
+  box-shadow: 0px 2px 24px 2px rgb(0, 0, 0.1);
+  margin-bottom: 0;
+  // width:5rem;
+}
+
+nb-card:last-of-type {
+  margin-bottom: 3em;
+}

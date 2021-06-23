@@ -9,7 +9,8 @@ import { SecurityScanConfigComponent } from './security-scan-config/security-sca
 import { SecurityScanDeleteFormComponent } from './security-scan-delete-form/security-scan-delete-form.component';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SecurityScanDetailComponent } from './security-scan-detail/security-scan-detail.component';
-import { MatIconModule, MatTableModule } from '@angular/material/';
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 // import { RefreshModalComponent } from '../../shared/modals/refresh-modal/refresh-modal.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RefreshModalComponent } from 'src/app/shared/modals/refresh-modal/refresh-modal.component';

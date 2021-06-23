@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
 import {BaseEvidenceComponent} from '../base-evidence/base-evidence.component';
 import {IRepo} from '../../../../widget_modules/repo/interfaces';
 

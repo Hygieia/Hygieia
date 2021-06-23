@@ -9,15 +9,14 @@
     border-bottom: 1px solid;
     color: $dash-widget-heading-text;
     letter-spacing: .1em;
-    padding-bottom: .5em;
-    margin-bottom: 1em;
+    padding-bottom: .2em;
+    margin-bottom: 0.5em;
 
     @include border-top-radius($dash-widget-border-radius);
     border-bottom-color: $dash-widget-sub-heading-border;
     @include text-standard;
     text-transform: uppercase;
   }
-
 
 }
 
