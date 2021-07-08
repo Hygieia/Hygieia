@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -25,9 +25,21 @@ import {NgxPaginationModule} from 'ngx-pagination';
 })
 class TestModule { }*/
 
+class MockModalRef {
+  componentInstance = {
+    id: undefined,
+    name: undefined,
+    description: undefined,
+    flags: undefined,
+    title: undefined
+  };
+  result: Promise<boolean> = new Promise((res, rej) => res(true));
+}
+
 describe('FeatureFlagsComponent', () => {
   let component: FeatureFlagsComponent;
   let fixture: ComponentFixture<FeatureFlagsComponent>;
+  let modal: NgbModal;
   const id = '123';
   const name = 'name';
   const description = 'description';
@@ -60,6 +72,7 @@ describe('FeatureFlagsComponent', () => {
     component.id = id;
     component.description = description;
     component.flags = flags;
+    modal = TestBed.get(NgbModal);
     fixture.detectChanges();
   });
 
@@ -69,5 +82,29 @@ describe('FeatureFlagsComponent', () => {
 
   it('should hit flagKeys', () => {
     component.flagKeys({test: 'test'});
+  });
+
+  it('should add new feature flag', () => {
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.addNewFeatureFlag();
+    expect(modal.open).toHaveBeenCalled();
+  });
+
+  it('should edit feature flag', () => {
+    const mockFlagObj = {
+      id: 'id',
+      name: 'name',
+      description: 'desc',
+      flags: 'flags'
+    };
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.editFeatureFlag(mockFlagObj);
+    expect(modal.open).toHaveBeenCalled();
+  });
+
+  it('should delete feature flag', () => {
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.deleteFeatureFlag({name: 'name', id: 'id'});
+    expect(modal.open).toHaveBeenCalled();
   });
 });

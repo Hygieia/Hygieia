@@ -77,4 +77,46 @@ describe('DashboardListComponent', () => {
     component.setDashboardType('Team');
     expect(component.dashboardType).toBe('Team');
   });
+  it('should navigate to audits', () => {
+    const spy = spyOn(router, 'navigate').and.callFake(() => true);
+    component.goToAuditReport();
+    expect(spy).toHaveBeenCalledWith(['/audits/nfrr']);
+  });
+  it('should navigate to dashboard view', () => {
+    const spy = spyOn(router, 'navigate').and.callFake(() => true);
+    component.navigateToTeamDashboard('foo');
+    expect(spy).toHaveBeenCalledWith(['/dashboard/dashboardView']);
+  });
+  it('should navigate tobuild viewer', () => {
+    const spy = spyOn(router, 'navigate').and.callFake(() => true);
+    component.goToBuildViewer();
+    expect(spy).toHaveBeenCalledWith(['/build/viewer']);
+  });
+  it('should navigate tobuild viewer', () => {
+    const spy = spyOn(router, 'navigate').and.callFake(() => true);
+    component.goToCollectorItemMetrics();
+    expect(spy).toHaveBeenCalledWith(['/collectorItem/viewer']);
+  });
+  it('should return dashboard name', () => {
+    const dbNAme = component.dashboardName({
+      id: '1',
+      type: 'db',
+      title: 'title',
+      configurationItemBusAppName: 'appName',
+      configurationItemBusServName: 'busServName'
+    });
+    expect(dbNAme).toEqual('title - appName - busServName');
+  });
+  it('should change tab', () => {
+    component.tabChange({
+      tabId: 'Team'
+    });
+    expect(component.dashboardType).toBe('Team');
+  });
+  it('should delete dashboard', () => {
+    component.deleteDashboard({}, new Event('foo'));
+  });
+  it('should edit dashboard', () => {
+    component.editDashboard({}, new Event('foo'));
+  });
 });

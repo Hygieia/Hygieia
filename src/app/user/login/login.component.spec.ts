@@ -83,9 +83,13 @@ describe('LoginComponent', () => {
 
   it('should login with SSO user', () => {
     component.activeTab = 'SSO';
-    const spy = spyOn(component, 'routeToSso').and.returnValue({ subscribe: () => true });
-    component.routeToSso();
-    expect(spy).toHaveBeenCalledWith();
+    const spy = spyOn(router, 'navigate').and.returnValue({ subscribe: () => true });
+    const obj = { value : {
+      username : 'test',
+      password: 'test'
+    }};
+    component.submit(obj);
+    expect(spy).toHaveBeenCalledWith(['/user/sso']);
   });
 
   it('should check sso variables', () =>  {

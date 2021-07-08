@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { UserDataService } from './user-data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { API_TOKEN_LIST, USER_LIST } from './user-data.service.mockdata';
 import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 describe('UserDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -13,7 +14,51 @@ describe('UserDataService', () => {
     providers: [UserDataService]
   }));
 
+  describe('UserDataService functions', () => {
+    let service: UserDataService;
+    let http: HttpClient;
 
+    beforeEach(() => {
+      service = TestBed.get(UserDataService);
+      http = TestBed.get(HttpClient);
+    });
+
+    it('get service account', () => {
+      const spy = spyOn(http, 'get').and.returnValue(of({}));
+      service.getServiceAccounts();
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should create account', () => {
+      const spy = spyOn(http, 'post').and.returnValue(of({}));
+      service.createAccount({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should delete service account', () => {
+      const spy = spyOn(http, 'delete').and.returnValue(of({}));
+      service.deleteServiceAccount({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should promote user to admin', () => {
+      const spy = spyOn(http, 'post').and.returnValue(of({}));
+      service.promoteUserToAdmin({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should demote user from admin', () => {
+      const spy = spyOn(http, 'post').and.returnValue(of({}));
+      service.demoteUserFromAdmin({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should delete properties', () => {
+      const spy = spyOn(http, 'delete').and.returnValue(of({}));
+      service.deleteProperties({});
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 
   it('should be created',
     inject(

@@ -14,6 +14,36 @@ describe('DashboardService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should load dashboard audits', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.loadDashboardAudits();
+  });
+
+  it('should load dashboard audits', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.subscribeDashboardRefresh();
+  });
+
+  it('should clear dashboards', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.clearDashboard();
+  });
+
+  it('should check collector item type exists', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.checkCollectorItemTypeExist('collectors');
+  });
+
+  it('should create dashboard', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.createDashboard({});
+  });
+
+  it('should load counts', () => {
+    const service: DashboardService = TestBed.get(DashboardService);
+    service.loadCounts();
+  });
+
   it('should load a dashboard by id',
     inject([HttpTestingController, DashboardService],
       (httpMock: HttpTestingController, service: DashboardService) => {

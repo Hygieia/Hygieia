@@ -1,8 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { DashboardDataService } from './dashboard-data.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DASHBOARDDATA } from './user-data.service.mockdata';
+import { of, throwError } from 'rxjs';
 
 describe('DashboardDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -348,5 +349,51 @@ describe('DashboardDataService', () => {
       }
     )
   );
+
+  describe('Service functions', () => {
+    let service: DashboardDataService;
+    let http: HttpClient;
+
+    beforeEach(() => {
+      service = TestBed.get(DashboardDataService);
+      http = TestBed.get(HttpClient);
+    });
+
+    it('should create new dashboard', () => {
+      const spy = spyOn(http, 'post').and.returnValue(of({}));
+      service.create({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should do nothing on error', () => {
+      const spy = spyOn(http, 'post').and.returnValue(throwError('error'));
+      service.create({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('delete widget', () => {
+      const spy = spyOn(http, 'put').and.returnValue(of({}));
+      service.deleteWidget(1234, {});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('upsert widget', () => {
+      const spy = spyOn(http, 'put').and.returnValue(of({}));
+      service.upsertWidget(1234, { id: 1234 });
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('save the general config data', () => {
+      const spy = spyOn(http, 'put').and.returnValue(of({}));
+      service.generalConfigSave({});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('console log error on failure to save general config data', () => {
+      const spy = spyOn(http, 'put').and.returnValue(throwError('error'));
+      service.generalConfigSave({});
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 
 });

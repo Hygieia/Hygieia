@@ -37,4 +37,16 @@ describe('ComboChartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should format integer', () => {
+    expect(component.formatInteger(12312.323)).toEqual('12312');
+  });
+
+  it('should format to minute', () => {
+    expect(component.formatToMinute(12312)).toEqual('0:12');
+  });
+
+  it('should format to day and month', () => {
+    expect(component.formatToDayAndMonth(new Date('Tue Feb 05 2019 12:05:22 GMT+0530 (IST)'))).toEqual('2/5');
+  });
 });

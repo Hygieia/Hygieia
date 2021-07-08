@@ -7,6 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { SignupComponent } from './signup.component';
 import {AuthService} from '../../core/services/auth.service';
+import { of, throwError } from 'rxjs';
 
 
 describe('SignupComponent', () => {
@@ -23,7 +24,8 @@ describe('SignupComponent', () => {
         RouterTestingModule.withRoutes([]),
         HttpClientTestingModule
       ],
-      declarations: [ SignupComponent ]
+      declarations: [ SignupComponent ],
+      providers: [ AuthService ]
     }).compileComponents();
   }));
 
@@ -55,12 +57,22 @@ describe('SignupComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/user/login']);
   });
   it('should register new user', () => {
-    const spy = spyOn(authService, 'register').and.returnValue({ subscribe: () => true });
+    const spy = spyOn(authService, 'register').and.returnValue(of({}));
     const obj = { value : {
       username : 'test',
       passwordGroup: { password: 'test' }
     }};
     component.submit(obj);
     expect(spy).toHaveBeenCalledWith({username: 'test', password: 'test'});
+  });
+
+  it('should throw error on auth fail', () => {
+    spyOn(authService, 'register').and.returnValue(throwError('foo'));
+    const obj = { value : {
+      username : 'test',
+      passwordGroup: { password: 'test' }
+    }};
+    component.submit(obj);
+    expect(component.errorMessage).toEqual('User already exists');
   });
 });

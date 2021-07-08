@@ -7,17 +7,19 @@ import {
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {FormModalComponent} from '../modals/form-modal/form-modal.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {WidgetDirective} from '../widget/widget.directive';
 import {ConfirmationModalComponent} from '../modals/confirmation-modal/confirmation-modal.component';
 import {of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DeleteConfirmModalComponent} from '../modals/delete-confirm-modal/delete-confirm-modal.component';
+import { DashboardService } from '../dashboard.service';
 
 describe('WidgetHeaderComponent', () => {
   let component: WidgetHeaderComponent;
   let fixture: ComponentFixture<WidgetHeaderComponent>;
-
+  let service: DashboardService;
+  let modal: NgbModal;
   @Component({
     template: ''
   })
@@ -44,6 +46,8 @@ describe('WidgetHeaderComponent', () => {
     fixture = TestBed.createComponent(WidgetHeaderComponent);
     component = fixture.componentInstance;
     component.widgetType = TestWidgetTypeComponent;
+    service = TestBed.get(DashboardService);
+    modal = TestBed.get(NgbModal);
     fixture.detectChanges();
   });
 
@@ -73,5 +77,29 @@ describe('WidgetHeaderComponent', () => {
       {auditType: 'PERF_TEST', auditStatus: 'OK', auditTypeStatus: 'OK'}]).pipe(map(result => result)));
     component.findWidgetAuditStatus(['TEST_RESULT', 'PERF_TEST']);
     expect(component.auditStatus).toEqual('OK');
+  });
+
+  it('should find last updated time', () => {
+    spyOn(service, 'dashboardConfig$').and.returnValue(of({}));
+    component.findLastUpdatedTime('foobar');
+  });
+
+  it('should return the right collector type', () => {
+    const title = ['Feature', 'Build', 'Deploy', 'Repo', 'Static Code Analysis', 'Security Analysis', 'Open Source', 'Test', 'default'];
+    const expected = ['CodeQuality', 'Build', 'Deployment', 'SCM', 'CodeQuality', 'StaticSecurityScan', 'LibraryPolicy', 'Test', ''];
+    let index = 0;
+    title.forEach((titleIterator) => {
+      expect(component.getCollectorType(titleIterator)).toEqual(expected[index]);
+      index++;
+    });
+  });
+
+  it('should open audit', () => {
+    spyOn(modal, 'open').and.returnValue({
+      componentInstance: {
+        auditResults: undefined
+      }
+    });
+    component.openAudit();
   });
 });

@@ -33,6 +33,7 @@ class TestModule { }
 describe('EditDashboardComponent', () => {
   let component: EditDashboardComponent;
   let fixture: ComponentFixture<EditDashboardComponent>;
+  let page: PaginationWrapperService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TestModule]
@@ -43,6 +44,7 @@ describe('EditDashboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditDashboardComponent);
     component = fixture.componentInstance;
+    page = TestBed.get(PaginationWrapperService);
     fixture.detectChanges();
   });
 
@@ -63,6 +65,11 @@ describe('EditDashboardComponent', () => {
     component.getNextPage({page: 1 , pageSize: 10}, false);
   });
 
+  it('should process dashboard error', () => {
+    const spy = spyOn(page, 'processDashboardError');
+    component.processDashboardError({});
+    expect(spy).toHaveBeenCalled();
+  });
 });
 
 

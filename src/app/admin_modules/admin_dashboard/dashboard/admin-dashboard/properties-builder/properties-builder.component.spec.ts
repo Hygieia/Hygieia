@@ -13,17 +13,22 @@ import {CreateOrUpdateApiPropertiesComponent} from '../modal/create-or-update-ap
 import {NgModule} from '@angular/core';
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { of } from 'rxjs';
+import {
+  CreateOrUpdateApiAuditPropertiesComponent
+} from '../modal/create-or-update-api-audit-properties/create-or-update-api-audit-properties.component';
 
 @NgModule({
   declarations: [PropertiesBuilderComponent, DashEditComponent, DashTrashComponent, GeneralFilterPipe,
-    GeneralOrderByPipe, CreateOrUpdateApiPropertiesComponent,
+    GeneralOrderByPipe, CreateOrUpdateApiPropertiesComponent, CreateOrUpdateApiAuditPropertiesComponent,
     GeneralDeleteComponent],
   providers: [UserDataService, NgbModal],
   imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbModule, HttpClientTestingModule, NgxPaginationModule],
   entryComponents: [
     PropertiesBuilderComponent,
     CreateOrUpdateApiPropertiesComponent,
-    GeneralDeleteComponent
+    GeneralDeleteComponent,
+    CreateOrUpdateApiAuditPropertiesComponent
   ]
 })
 class TestModule { }
@@ -31,6 +36,7 @@ class TestModule { }
 describe('PropertiesBuilderComponent', () => {
   let component: PropertiesBuilderComponent;
   let fixture: ComponentFixture<PropertiesBuilderComponent>;
+  let userData: UserDataService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,6 +49,7 @@ describe('PropertiesBuilderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PropertiesBuilderComponent);
     component = fixture.componentInstance;
+    userData = TestBed.get(UserDataService);
     fixture.detectChanges();
   });
 
@@ -51,6 +58,7 @@ describe('PropertiesBuilderComponent', () => {
   });
 
   it('should loadServiceAccounts', () => {
+    spyOn(userData, 'getPropertiesBuilderData').and.returnValue(of({}));
     component.ngOnInit();
   });
 
@@ -76,5 +84,17 @@ describe('PropertiesBuilderComponent', () => {
 
   it('should hit properkeys', () => {
     component.properKeys({123: '123'});
+  });
+
+  it('should add new api audit', () => {
+    component.addNewApiAuditPropertiesBuilder();
+  });
+
+  it('should edit api audit', () => {
+    const collector = {
+      name: 'test',
+      properties: 'test'
+    };
+    component.editApiAuditPropertiesBuilder(collector);
   });
 });

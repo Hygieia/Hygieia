@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashEditComponent } from '../../../../../shared/dash-edit/dash-edit.component';
 import { DashTrashComponent } from '../../../../../shared/dash-trash/dash-trash.component';
 import { UserDataService } from '../../../services/user-data.service';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -14,6 +14,7 @@ import {GeneralFilterPipe} from '../../../../../shared/pipes/filter.pipe';
 import {GeneralOrderByPipe} from '../../../../../shared/pipes/order-by.pipe';
 import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete-modal/general-delete-modal.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { of } from 'rxjs';
 
 /*@NgModule({
   declarations: [ServiceAccountsComponent, DashEditComponent, DashTrashComponent, GeneralFilterPipe,
@@ -33,9 +34,26 @@ import {NgxPaginationModule} from 'ngx-pagination';
 })
 class TestModule { }*/
 
+class MockUserDataService {
+  getServiceAccounts() {
+    return of();
+  }
+}
+
+class MockModalRef {
+  componentInstance = {
+    id: undefined,
+    serviceAccountForm: undefined,
+    fileNames: undefined,
+    title: undefined
+  };
+  result: Promise<any> = new Promise((resolve, reject) => resolve(true));
+}
+
 describe('ServiceAccountsComponent', () => {
   let component: ServiceAccountsComponent;
   let fixture: ComponentFixture<ServiceAccountsComponent>;
+  let modal: NgbModal;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,7 +65,10 @@ describe('ServiceAccountsComponent', () => {
         GeneralFilterPipe,
         GeneralOrderByPipe,
         GeneralDeleteComponent],
-      providers: [UserDataService, FormBuilder, NgbActiveModal],
+      providers: [
+        { provide: UserDataService, useClass: MockUserDataService },
+        FormBuilder, NgbActiveModal
+      ],
       imports: [FormsModule, NgbModule, CommonModule, ReactiveFormsModule, HttpClientTestingModule, NgxPaginationModule]
     })
       .compileComponents();
@@ -57,6 +78,7 @@ describe('ServiceAccountsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ServiceAccountsComponent);
     component = fixture.componentInstance;
+    modal = TestBed.get(NgbModal);
     fixture.detectChanges();
   });
 
@@ -66,5 +88,32 @@ describe('ServiceAccountsComponent', () => {
 
   it('should loadServiceAccounts', () => {
     component.ngOnInit();
+  });
+
+  it('should create account', () => {
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.createAccount();
+    expect(modal.open).toHaveBeenCalled();
+  });
+
+  it('should update account', () => {
+    const mock = {
+      id: 'id',
+      serviceAccountName: 'name',
+      fileName: 'filename'
+    };
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.updateAccount(mock);
+    expect(modal.open).toHaveBeenCalled();
+  });
+
+  it('should delete account', () => {
+    const mock = {
+      serviceAccountName: 'name',
+      id: 'id'
+    };
+    spyOn(modal, 'open').and.returnValue(new MockModalRef());
+    component.deleteServiceAccount(mock);
+    expect(modal.open).toHaveBeenCalled();
   });
 });
